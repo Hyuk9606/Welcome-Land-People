@@ -1,4 +1,4 @@
-# SSAFY 특화 프로젝트
+g# SSAFY 특화 프로젝트
 
 ### C207 Boonmoja
 
