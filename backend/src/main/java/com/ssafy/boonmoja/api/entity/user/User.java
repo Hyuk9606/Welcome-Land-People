@@ -74,6 +74,12 @@ public class User {
     @Column(name = "MODIFIED_AT")
     @NotNull
     private LocalDateTime modifiedAt;
+    
+    @Column(name = "AGE_RANGE")
+    private String ageRange;
+    
+    @Column(name="GENDER")
+    private String gender;
 
     public User(
             @NotNull @Size(max = 64) String userId,
@@ -84,7 +90,9 @@ public class User {
             @NotNull ProviderType providerType,
             @NotNull RoleType roleType,
             @NotNull LocalDateTime createdAt,
-            @NotNull LocalDateTime modifiedAt
+            @NotNull LocalDateTime modifiedAt,
+            String gender,
+            String ageRange
     ) {
         this.userId = userId;
         this.username = username;
@@ -96,5 +104,7 @@ public class User {
         this.roleType = roleType;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
+        this.gender = gender;
+        this.ageRange = ageRange;
     }
 }
