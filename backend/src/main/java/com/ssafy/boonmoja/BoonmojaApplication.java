@@ -12,7 +12,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 		AppProperties.class
 })
 public class BoonmojaApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(BoonmojaApplication.class, args);
 	}
