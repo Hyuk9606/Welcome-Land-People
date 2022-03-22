@@ -28,7 +28,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
         String tokenStr = HeaderUtil.getAccessToken(request);
         AuthToken token = tokenProvider.convertAuthToken(tokenStr);
-
+        log.info("JWT Filter request has - {}",tokenStr);
         if (token.validate()) {
             Authentication authentication = tokenProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);

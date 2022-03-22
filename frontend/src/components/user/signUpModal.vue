@@ -5,30 +5,22 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">로그인</h4>
-              <button class="close" @click="$emit('onCloseModal')"></button>
+              <h4 class="modal-title">회원가입</h4>
+              <button class="close" @click="$emit('onCloseModal')">X</button>
             </div>
             <div class="modal-body">
               <div class="social-login-container">
-                <template v-for='social in socials' >
-									<a :href='socialLoginUrl(social.socialType)' class="social_btn" :key="social.socialType">
-										<img :src='social.src' :style='{width: social.width, height: social.height}' alt="" class="social_login">
-										{{social.comment}}
-									</a>
-								</template>
-              </div>
-              <div class="or-separator">
-                <span class="or-text">OR</span>
+
               </div>
               <div class="form-wrap">
                 <div class="form-item">
                   <input
-                    type="text"
+                    type="email"
                     class="form-control"
-                    placeholder="아이디"
+                    placeholder="이메일"
                     v-model="id"
                     @input="inputChanged"
-                    @keyup.enter="login"
+                    @keyup.enter="join"
                   />
                 </div>
                 <div class="form-item">
@@ -38,17 +30,28 @@
                     placeholder="비밀번호"
                     v-model="password"
                     @input="inputChanged"
-                    @keyup.enter="login"
+                    @keyup.enter="join"
                   />
                 </div>
                 <div class="form-item">
-                  <button class="btn btn-block btn-primary">로그인</button>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="이름"
+                    v-model="name"
+                    @input="inputChanged"
+                    @keyup.enter="join"
+                  />
+                </div>
+
+                <div class="form-item">
+                  <button @click="join" class="btn btn-block btn-primary">등록</button>
                 </div>
               </div>
             </div>
-						<div class="modal-footer">
-							<button class="btn btn-danger" @click='$emit("onCloseModal")'>닫기</button>
-						</div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" @click='$emit("onCloseModal")'>닫기</button>
+            </div>
           </div>
         </div>
       </div>
@@ -67,56 +70,35 @@ export default {
     return {
       id: "",
       password: "",
+      name:"",
       isProcess: false,
       cannotLogin: false,
       isLoginFailed: false,
-      socials: [
-        {
-          socialType: "google",
-          src: $.getSocialImage("google"),
-          width: "32px",
-          height: "32px",
-          comment: "구글 로그인",
-        },
-        {
-          socialType: "naver",
-          src: $.getSocialImage("naver"),
-          width: "32px",
-          height: "32px",
-          comment: "네이버 로그인",
-        },
-        {
-          socialType: "kakao",
-          src: $.getSocialImage("kakao"),
-          width: "32px",
-          height: "32px",
-          comment: "카카오 로그인",
-        },
-      ],
     };
   },
   methods: {
     ...mapActions(["fetchUser"]),
     ...mapMutations(["setToken"]),
-    login() {
+    join() {
       if (this.isProcess) return;
-      if (this.id.trim() === "" || this.password.trim() === "") {
+      if (this.id.trim() === "" || this.password.trim() === "" || this.name.trim() === "") {
         this.cannotLogin = true;
         return;
       }
-      accountApi.login(
+      accountApi.register(
         {
-          id: this.id,
-          password: this.password,
-          socialType: "LOCAL",
+          
+            "user_id": this.id,
+            "password": this.password,
+            "username":this.name
+          
+          // socialType: "LOCAL",
         },
         (body) => {
           this.setToken(body.token);
           this.id = this.password = "";
           this.isProcess = false;
-          this.fetchUser(() => {
-            this.$emit("onCloseModal");
-          });
+          this.$emit("onCloseModal");
         },
         (err) => {
           if (err.response.data.status === 401) {
@@ -138,7 +120,7 @@ export default {
 };
 </script>
 
-<style>
+<style scope>
 .container {
   width: 100%;
   padding-right: 15px;
@@ -246,30 +228,7 @@ button.close {
 .modal-body > ul > li {
   list-style: none;
 }
-.social_login {
-  height: 32px;
-  float: left;
-  margin-top: 5.2px;
-  margin-left: 10px;
-}
-.social_btn:hover {
-  color: #2098f3;
-}
-.social_btn {
-  margin-bottom: 15px;
-  font-weight: 400;
-  font-size: 16px;
-  display: block;
-  width: 100%;
-  height: 45px;
-  line-height: 45px;
-  margin-bottom: 15px;
-  border-radius: 4px;
-  border: 1px solid #e8e8e8;
-  cursor: pointer;
-  color: black;
-  text-decoration: none;
-}
+
 .modal-body {
   padding-left: 2em;
   padding-right: 2em;
@@ -304,25 +263,6 @@ button.close {
 
 .social_login_container {
   text-align: center;
-}
-
-.or-text {
-  position: absolute;
-  left: 46%;
-  top: 0;
-  background: #fff;
-  padding: 10px;
-  color: rgba(0, 0, 0, 0.45);
-}
-
-.or-separator {
-  border-bottom: 1px solid #eee;
-  padding: 10px 0;
-  position: relative;
-  display: block;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  font-size: 1em;
 }
 
 .form-item {
@@ -435,27 +375,4 @@ button.close {
     margin: 1.75rem auto;
   }
 }
-
-/* .modal, .overlay{
-        width:100%;
-        height: 100%;
-        position:fixed;
-        left:0;
-        top:0;
-    }
-    .overlay{
-        opacity:0.5;
-        background: black;
-    }
-    .modal-card{
-        position:relative;
-        max-width:50%;
-        margin:auto;
-        margin-top:30px;
-        padding:20px;
-        background-color: white;
-        min-height: 400px;
-        z-index:10;
-        opacity:1;
-    } */
 </style>

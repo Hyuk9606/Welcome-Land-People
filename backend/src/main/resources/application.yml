@@ -50,7 +50,7 @@ spring:
                     scope:
                         - nickname
                         - email
-                        - profile_image
+#                        - profile_image
                     clientName: Naver
                 kakao:
                     clientId: 'ad9e48f30c01a6eb33c7af2adcb2a0a1'
@@ -60,7 +60,7 @@ spring:
                     redirectUri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
                     scope:
                         - profile_nickname
-                        - profile_image
+#                        - profile_image
                         - account_email
                     clientName: Kakao
             # Provider ??
@@ -84,7 +84,7 @@ cors:
     max-age: 3600
 
 # jwt secret key ??
-jwt.secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOds'
+jwt.secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOdsboonmoja'
 
 # ?? ?? secret Key ? RedirectUri ??
 app:

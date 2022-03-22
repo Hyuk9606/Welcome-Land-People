@@ -1,10 +1,5 @@
 <template>
   <div>
-    <!-- <div :class="{ sticky: stickyMode }">
-      <button class="account-button" v-if="!isLoggedIn">로그이잉</button>
-      <button class="account-button loggedIn" v-else @click="logout">로그아웃
-      </button>
-    </div> -->
 		<div class="bp-header-container" :class='{sticky:stickyMode}'>
 			<header class="bp-header">
 				<a @clicl='go("/")' class="logo-link">
@@ -16,6 +11,7 @@
 						</ul>
 						<div class="bp-account">
 							<button class="account-button" v-if='!isLoggedIn' @click='$emit("onOpenLoginModal")'>로그인</button>
+              <button class="signup-button" v-if='!isLoggedIn' @click='$emit("onOpenSignUpModal")'>회원가입</button>
 							<button class="account-button loggedin" v-else @click='logout'>로그아웃</button>
 						</div>
 					</nav>

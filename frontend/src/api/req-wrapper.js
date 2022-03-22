@@ -23,8 +23,16 @@ export default {
       .catch(fail);
   },
   post(url, body, success, fail = (err) => err.response.data.message, config) {
+    console.log(wrap(url));
     axios
       .post(wrap(url), body, appendAuth(config))
+      .then(handler.handle(success))
+      .catch(fail);
+  },
+  join(url, body, success, fail = (err) => err.response.data.message) {
+    console.log(wrap(url));
+    axios
+      .post(wrap(url), body)
       .then(handler.handle(success))
       .catch(fail);
   },

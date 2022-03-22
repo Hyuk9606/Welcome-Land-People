@@ -1,8 +1,9 @@
 <template>
   <div class="home">
-    <nav-bar :stickyMode="stickyMode" @onOpenLoginModal="openLoginModal" @onLogout="logout"/>
+    <nav-bar :stickyMode="stickyMode" @onOpenLoginModal="openLoginModal" @onOpenSignUpModal="openSignUpModal" @onLogout="logout"/>
     <router-view />
     <login-modal v-if="isLoginModalOpen" :isOpen="isLoginModalOpen" @onCloseModal="closeLoginModal"/>
+    <sign-up-modal v-if="isSignUpModalOpen" :isOpen="isSignUpModalOpen" @onCloseModal="closeSignUpModal"/>
 
     <div class="bp-main-container">
       <section class="main-top-section">
@@ -17,15 +18,18 @@
 
 <script>
 import NavBar from "@/components/NavBar";
-import LoginModal from "@/components/LoginModal";
+import LoginModal from "@/components/user/LoginModal";
+import signUpModal from "@/components/user/signUpModal";
+import accountApi from "../api/account";
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: "Home",
-  components: { NavBar, LoginModal },
+  components: { NavBar, LoginModal,signUpModal },
   data() {
     return {
       isLoginModalOpen: false,
+      isSignUpModalOpen: false,
       isScrollTop: true,
     };
   },
@@ -34,25 +38,29 @@ export default {
       this.isScrollTop = window.scrollY === 0;
     });
     window.onload=function(){
-      console.log("웩")
-      console.log(process.env.VUE_APP_BACKEND_DOMAIN==null)
     }
   },
   methods: {
     ...mapMutations(['setToken', 'setUser']),
     openLoginModal() {
       this.isLoginModalOpen = true;
-      //////////////////////////////////////////////////////////////
-
-      console.log(location);
+    },
+    openSignUpModal(){
+      this.isSignUpModalOpen = true;
     },
     closeLoginModal() {
       this.isLoginModalOpen = false;
     },
+    closeSignUpModal(){
+      this.isSignUpModalOpen = false;
+    },
     logout() {
+      accountApi.logout(
+        {"user_id" : this.user.userId}
+      );
+      alert("로그아웃 되었습니다.");
       this.setToken(null);
       this.setUser(null);
-      alert("로그아웃 되었습니다.");
       if (this.$route.path !== "/") this.$router.push("/");
     },
   },
