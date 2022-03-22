@@ -66,12 +66,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 userInfo.getId(),
                 userInfo.getName(),
                 userInfo.getEmail(),
-                "Y",
-                userInfo.getImageUrl(),
+//                userInfo.getImageUrl(),
                 providerType,
                 RoleType.USER,
                 now,
-                now
+                now,
+                userInfo.getGender(),
+                userInfo.getAgeRange()
         );
 
         return userRepository.saveAndFlush(user);
@@ -82,10 +83,18 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             user.setUsername(userInfo.getName());
         }
 
-        if (userInfo.getImageUrl() != null && !user.getProfileImageUrl().equals(userInfo.getImageUrl())) {
-            user.setProfileImageUrl(userInfo.getImageUrl());
+//        if (userInfo.getImageUrl() != null && !user.getProfileImageUrl().equals(userInfo.getImageUrl())) {
+//            user.setProfileImageUrl(userInfo.getImageUrl());
+//        }
+        
+        if (userInfo.getGender() != null &&( user.getGender() == null || !user.getGender().equals(userInfo.getGender()))) {
+            user.setGender(userInfo.getGender());
         }
-
+        
+        if (userInfo.getAgeRange() != null &&( user.getAgeRange() == null || !user.getAgeRange().equals(userInfo.getAgeRange()))) {
+            user.setAgeRange(userInfo.getAgeRange());
+        }
+    
         return user;
     }
 }
