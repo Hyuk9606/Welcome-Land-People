@@ -40,26 +40,5 @@ public class KakaoOAuth2UserInfo extends OAuth2UserInfo {
 //
 //        return (String) properties.get("thumbnail_image");
 //    }
-    
-    @Override
-    public String getAgeRange() {
-        Map<String, Object> properties = (Map<String, Object>) attributes.get("properties");
-    
-        if (properties == null) {
-            return null;
-        }
-    
-        return (String) properties.get("age_range");
-    }
-    
-    @Override
-    public String getGender() {
-        Map<String, Object> properties = (Map<String, Object>) attributes.get("properties");
-    
-        if (properties == null) {
-            return null;
-        }
-    
-        return (String) properties.get("gender");
-    }
+
 }
