@@ -18,6 +18,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Service
 @RequiredArgsConstructor
@@ -71,8 +72,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 RoleType.USER,
                 now,
                 now,
-                userInfo.getGender(),
-                userInfo.getAgeRange()
+                new ArrayList<>()
         );
 
         return userRepository.saveAndFlush(user);
@@ -82,19 +82,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         if (userInfo.getName() != null && !user.getUsername().equals(userInfo.getName())) {
             user.setUsername(userInfo.getName());
         }
-
-//        if (userInfo.getImageUrl() != null && !user.getProfileImageUrl().equals(userInfo.getImageUrl())) {
-//            user.setProfileImageUrl(userInfo.getImageUrl());
-//        }
-        
-        if (userInfo.getGender() != null &&( user.getGender() == null || !user.getGender().equals(userInfo.getGender()))) {
-            user.setGender(userInfo.getGender());
-        }
-        
-        if (userInfo.getAgeRange() != null &&( user.getAgeRange() == null || !user.getAgeRange().equals(userInfo.getAgeRange()))) {
-            user.setAgeRange(userInfo.getAgeRange());
-        }
-    
         return user;
     }
 }

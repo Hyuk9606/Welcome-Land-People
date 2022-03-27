@@ -28,7 +28,15 @@ public class UserPrincipal implements OAuth2User, UserDetails, OidcUser {
     private final RoleType roleType;
     private final Collection<GrantedAuthority> authorities;
     private Map<String, Object> attributes;
-
+    
+    public UserPrincipal(String userId, String password, Collection<GrantedAuthority> authorities) {
+        this.userId = userId;
+        this.password = password;
+        this.authorities = authorities;
+        this.providerType = null;
+        this.roleType = null;
+    }
+    
     @Override
     public Map<String, Object> getAttributes() {
         return attributes;
@@ -99,5 +107,17 @@ public class UserPrincipal implements OAuth2User, UserDetails, OidcUser {
         userPrincipal.setAttributes(attributes);
 
         return userPrincipal;
+    }
+    
+    @Override
+    public String toString() {
+        return "UserPrincipal{" +
+                "userId='" + userId + '\'' +
+                ", password='" + password + '\'' +
+                ", providerType=" + providerType +
+                ", roleType=" + roleType +
+                ", authorities=" + authorities +
+                ", attributes=" + attributes +
+                '}';
     }
 }

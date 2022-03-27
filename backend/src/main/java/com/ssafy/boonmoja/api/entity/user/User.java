@@ -1,6 +1,7 @@
 package com.ssafy.boonmoja.api.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ssafy.boonmoja.api.entity.joinTable.UserContents;
 import com.ssafy.boonmoja.oauth.entity.ProviderType;
 import com.ssafy.boonmoja.oauth.entity.RoleType;
 import lombok.*;
@@ -9,6 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,7 +21,7 @@ import java.time.LocalDateTime;
 @Builder
 @Table(name = "USER")
 public class User{
-    @JsonIgnore
+//    @JsonIgnore
     @Id
     @Column(name = "USER_SEQ")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,11 +71,8 @@ public class User{
     @NotNull
     private LocalDateTime modifiedAt;
     
-    @Column(name = "AGE_RANGE")
-    private String ageRange;
-    
-    @Column(name="GENDER")
-    private String gender;
+    @OneToMany(mappedBy = "user")
+    private List<UserContents> userContents = new ArrayList<>();
 
     public User(
             @NotNull @Size(max = 64) String userId,
@@ -83,8 +83,7 @@ public class User{
             @NotNull RoleType roleType,
             @NotNull LocalDateTime createdAt,
             @NotNull LocalDateTime modifiedAt,
-            String gender,
-            String ageRange
+            List<UserContents> userContents
     ) {
         this.userId = userId;
         this.username = username;
@@ -95,37 +94,22 @@ public class User{
         this.roleType = roleType;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
-        this.gender = gender;
-        this.ageRange = ageRange;
+        this.userContents = userContents;
     }
     
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    @Builder.Default
-//    private List<String> roles = new ArrayList<>();
-//
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return this.roles.stream()
-//                .map(SimpleGrantedAuthority::new)
-//                .collect(Collectors.toList());
-//    }
-//    @Override
-//    public boolean isAccountNonExpired() {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonLocked() {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean isCredentialsNonExpired() {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean isEnabled() {
-//        return false;
-//    }
+    @Override
+    public String toString() {
+        return "User{" +
+                "userSeq=" + userSeq +
+                ", userId='" + userId + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", providerType=" + providerType +
+                ", roleType=" + roleType +
+                ", createdAt=" + createdAt +
+                ", modifiedAt=" + modifiedAt +
+                ", userContents=" + userContents +
+                '}';
+    }
 }

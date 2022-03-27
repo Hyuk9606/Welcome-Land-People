@@ -19,7 +19,7 @@ spring:
     jpa:
         generate-ddl: true
         hibernate:
-            ddl-auto: update
+            ddl-auto: update    # 운영하는 환경에서는 사용하면 안됨.
         show-sql: true
         properties:
             hibernate:
@@ -30,7 +30,7 @@ spring:
                 jdbc.batch_size: 20
                 order_inserts: true
                 order_updates: true
-                format_sql: true
+#                format_sql: true
     # Security OAuth
     security:
         oauth2.client:
