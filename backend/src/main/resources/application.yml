@@ -30,7 +30,7 @@ spring:
                 jdbc.batch_size: 20
                 order_inserts: true
                 order_updates: true
-                format_sql: true
+#                format_sql: true
     # Security OAuth
     security:
         oauth2.client:

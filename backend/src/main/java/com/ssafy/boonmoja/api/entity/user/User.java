@@ -1,7 +1,7 @@
 package com.ssafy.boonmoja.api.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ssafy.boonmoja.api.entity.joinTable.UserPlace;
+import com.ssafy.boonmoja.api.entity.joinTable.UserContents;
 import com.ssafy.boonmoja.oauth.entity.ProviderType;
 import com.ssafy.boonmoja.oauth.entity.RoleType;
 import lombok.*;
@@ -72,7 +72,7 @@ public class User{
     private LocalDateTime modifiedAt;
     
     @OneToMany(mappedBy = "user")
-    private List<UserPlace> userPlaces = new ArrayList<>();
+    private List<UserContents> userContents = new ArrayList<>();
 
     public User(
             @NotNull @Size(max = 64) String userId,
@@ -83,7 +83,7 @@ public class User{
             @NotNull RoleType roleType,
             @NotNull LocalDateTime createdAt,
             @NotNull LocalDateTime modifiedAt,
-            List<UserPlace> userPlaces
+            List<UserContents> userContents
     ) {
         this.userId = userId;
         this.username = username;
@@ -94,7 +94,7 @@ public class User{
         this.roleType = roleType;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
-        this.userPlaces = userPlaces;
+        this.userContents = userContents;
     }
     
     @Override
@@ -109,7 +109,7 @@ public class User{
                 ", roleType=" + roleType +
                 ", createdAt=" + createdAt +
                 ", modifiedAt=" + modifiedAt +
-                ", userPlaces=" + userPlaces +
+                ", userContents=" + userContents +
                 '}';
     }
 }
