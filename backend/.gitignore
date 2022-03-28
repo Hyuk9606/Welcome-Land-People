@@ -453,6 +453,7 @@ bin/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+!**/src/test/java/com/ssafy/boonmoja/
 
 ### NetBeans ###
 /nbproject/private/
