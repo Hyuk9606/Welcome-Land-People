@@ -41,7 +41,7 @@ public class ContentsController {
             contentsList = contentsService.getContentsEqualLabelAndTitle(label, query);
         }
         log.info("Get {} list contents label {} include {} : {}", select, label, query, contentsList);
-        
+        log.trace("{}",query);
         return ApiResponse.success("data", contentsList);
     }
     

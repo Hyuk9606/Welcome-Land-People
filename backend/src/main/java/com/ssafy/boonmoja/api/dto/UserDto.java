@@ -42,6 +42,7 @@ public class UserDto {
     
     private LocalDateTime modifiedAt;
     
+    @Builder.Default
     private List<String> userContents = new ArrayList<>();
     
     
