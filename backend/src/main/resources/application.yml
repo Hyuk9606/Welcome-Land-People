@@ -15,6 +15,19 @@ spring:
             driver-class-name: ${spring.datasource.driver-class-name}
             data-source-properties:
                 rewriteBatchedStatements: true
+    second-datasource:
+        mongodb:
+            authentication-database: admin
+            username: root
+            password: root
+            database: boonmoja
+            port: 27017
+            host: localhost
+        servlet:
+            multipart:
+                max-file-size: 5MB
+                max-request-size: 5MB
+                enabled: true
     # JPA ??
     jpa:
         generate-ddl: true
