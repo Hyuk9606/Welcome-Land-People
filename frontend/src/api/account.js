@@ -1,10 +1,10 @@
 import req from "./req-wrapper";
 
 const ACCOUNT_URI = {
-  LOGIN: "/v1/auth/login",
-  USER: "/v1/users",
-  JOIN: "/v1/users/join",
-  LOGOUT: "/v1/users/logout",
+  LOGIN: "/auth/login",
+  USER: "/users",
+  JOIN: "/users/join",
+  LOGOUT:"/users/logout"
 };
 
 export default {
@@ -14,10 +14,10 @@ export default {
   getUser(success) {
     req.get(ACCOUNT_URI.USER, success);
   },
-  logout(body, success) {
-    req.post(ACCOUNT_URI.LOGOUT, body, success);
+  logout(body,success) {
+    req.post(ACCOUNT_URI.LOGOUT,body,success);
   },
   register(body, success, fail) {
     req.join(ACCOUNT_URI.JOIN, body, success, fail);
-  },
+  }
 };
