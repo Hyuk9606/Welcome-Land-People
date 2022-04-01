@@ -1,6 +1,7 @@
-package com.ssafy.boonmoja.fileupload.repository;
+package com.ssafy.boonmoja.api.repository.image;
 
-import com.ssafy.boonmoja.fileupload.model.MapView;
+
+import com.ssafy.boonmoja.api.entity.image.MapView;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface MapViewRepository extends MongoRepository<MapView, String> {

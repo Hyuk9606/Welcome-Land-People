@@ -1,8 +1,8 @@
-package com.ssafy.boonmoja.fileupload.controller;
+package com.ssafy.boonmoja.api.controller.image;
 
-import com.ssafy.boonmoja.fileupload.dto.MapViewDto;
-import com.ssafy.boonmoja.fileupload.model.MapView;
-import com.ssafy.boonmoja.fileupload.repository.MapViewRepository;
+import com.ssafy.boonmoja.api.dto.mapView.MapViewDto;
+import com.ssafy.boonmoja.api.entity.image.MapView;
+import com.ssafy.boonmoja.api.repository.image.MapViewRepository;
 import com.ssafy.boonmoja.oauth.annotation.CurrentUser;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -35,8 +35,8 @@ public class MapViewController {
     })
     @PostMapping("/type/{loc}")
     public ApiResult<MapView> postMapType(@CurrentUser String userId,
-                                         @PathVariable Integer loc,
-                                         @RequestBody MapViewDto mapViewDto) {
+                                          @PathVariable Integer loc,
+                                          @RequestBody MapViewDto mapViewDto) {
         // maptype : image or color
 //        log.info("user: {} {}", userId, loc);
         MapView mapView;

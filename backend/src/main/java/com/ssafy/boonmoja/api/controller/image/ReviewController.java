@@ -1,9 +1,9 @@
-package com.ssafy.boonmoja.fileupload.controller;
+package com.ssafy.boonmoja.api.controller.image;
 
-import com.ssafy.boonmoja.fileupload.dto.ReviewResDto;
-import com.ssafy.boonmoja.fileupload.model.Review;
-import com.ssafy.boonmoja.fileupload.repository.ReviewRepository;
-import com.ssafy.boonmoja.fileupload.service.ReviewService;
+import com.ssafy.boonmoja.api.dto.review.ReviewResDto;
+import com.ssafy.boonmoja.api.entity.image.Review;
+import com.ssafy.boonmoja.api.repository.image.ReviewRepository;
+import com.ssafy.boonmoja.api.service.ReviewService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -14,7 +14,6 @@ import org.bson.types.Binary;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;

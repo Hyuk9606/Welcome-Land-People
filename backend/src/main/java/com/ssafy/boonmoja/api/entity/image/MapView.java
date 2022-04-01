@@ -1,18 +1,13 @@
-package com.ssafy.boonmoja.fileupload.model;
+package com.ssafy.boonmoja.api.entity.image;
 
 import com.mongodb.lang.Nullable;
-import com.ssafy.boonmoja.api.entity.user.User;
-import com.ssafy.boonmoja.fileupload.dto.MapViewDto;
 import lombok.*;
 import org.bson.types.Binary;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /*
 @Data는!?!
