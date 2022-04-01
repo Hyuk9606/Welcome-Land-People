@@ -1,4 +1,4 @@
-package com.ssafy.boonmoja.fileupload.dto;
+package com.ssafy.boonmoja.api.dto.mapView;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

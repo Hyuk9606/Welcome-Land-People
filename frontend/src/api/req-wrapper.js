@@ -2,7 +2,7 @@ import axios from "axios";
 import store from "../store/index";
 import handler from "./res-handler";
 // const URI_PREFIX = ""
-const URI_PREPENDER = "/api/v1";
+const URI_PREPENDER = "/api";
 const wrap = (url) => `${URI_PREPENDER}${url}`;
 const appendAuth = (config) => {
   const token = store.getters.token;
@@ -17,30 +17,18 @@ const appendAuth = (config) => {
 export default {
   get(url, success, fail = (err) => err.response.data.message, config) {
     console.log(url);
-    axios
-      .get(wrap(url), appendAuth(config))
-      .then(handler.handle(success))
-      .catch(fail);
+    axios.get(wrap(url), appendAuth(config)).then(handler.handle(success)).catch(fail);
   },
   post(url, body, success, fail = (err) => err.response.data.message, config) {
     console.log(wrap(url));
-    axios
-      .post(wrap(url), body, appendAuth(config))
-      .then(handler.handle(success))
-      .catch(fail);
+    axios.post(wrap(url), body, appendAuth(config)).then(handler.handle(success)).catch(fail);
   },
   join(url, body, success, fail = (err) => err.response.data.message) {
     console.log(wrap(url));
-    axios
-      .post(wrap(url), body)
-      .then(handler.handle(success))
-      .catch(fail);
+    axios.post(wrap(url), body).then(handler.handle(success)).catch(fail);
   },
   put(url, body, success, fail = (err) => err.response.data.message, config) {
-    axios
-      .put(wrap(url), body, appendAuth(config))
-      .then(handler.handle(success))
-      .catch(fail);
+    axios.put(wrap(url), body, appendAuth(config)).then(handler.handle(success)).catch(fail);
   },
   upload(url, body, progress, success, fail) {
     var formData = new FormData();
@@ -67,9 +55,6 @@ export default {
       .catch(fail);
   },
   delete(url, success, fail = (err) => err.response.data.message, config) {
-    axios
-      .delete(wrap(url), appendAuth(config))
-      .then(handler.handle(success))
-      .catch(fail);
+    axios.delete(wrap(url), appendAuth(config)).then(handler.handle(success)).catch(fail);
   },
 };

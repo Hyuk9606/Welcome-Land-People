@@ -1,8 +1,8 @@
-package com.ssafy.boonmoja.fileupload.controller;
+package com.ssafy.boonmoja.api.controller.image;
 
-import com.ssafy.boonmoja.fileupload.dto.MapViewDto;
-import com.ssafy.boonmoja.fileupload.model.MapView;
-import com.ssafy.boonmoja.fileupload.repository.MapViewRepository;
+import com.ssafy.boonmoja.api.dto.mapView.MapViewDto;
+import com.ssafy.boonmoja.api.entity.image.MapView;
+import com.ssafy.boonmoja.api.repository.image.MapViewRepository;
 import com.ssafy.boonmoja.oauth.annotation.CurrentUser;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -27,12 +27,6 @@ public class MapViewController {
 
     private final MapViewRepository mapViewRepo;
 
-//    @Operation(summary = "이미지 or 컬러 중에 타입 선택", description = "URL에 담긴 변수와 일치하는 항목을 검색합니다.")
-//    @Parameters({
-//            @Parameter(name = "userId", description = "지역 or 상호"),
-//            @Parameter(name = "loc", description = "[\"관광지\", \"쇼핑\", \"숙박\", \"음식\", ... ]"),
-//            @Parameter(name = "mapType", description = "검색할 단어")
-//    })
     @Operation(summary = "이미지 or 컬러 중에 타입 선택", description = "현재 로그인된 유저(userId)의 행정구역(loc)의 mapType을 지정한다.")
     @Parameters({
             @Parameter(name = "userId", description = "현재 로그인된 유저"),
@@ -41,10 +35,10 @@ public class MapViewController {
     })
     @PostMapping("/type/{loc}")
     public ApiResult<MapView> postMapType(@CurrentUser String userId,
-                                         @PathVariable Integer loc,
-                                         @RequestBody MapViewDto mapViewDto) {
+                                          @PathVariable Integer loc,
+                                          @RequestBody MapViewDto mapViewDto) {
         // maptype : image or color
-        log.info("user: {} {}", userId, loc);
+//        log.info("user: {} {}", userId, loc);
         MapView mapView;
 
         if (mapViewRepo.findByUserAndLoc(userId, loc) == null) {
@@ -59,11 +53,10 @@ public class MapViewController {
                 mapView.setImage(null);
             }
         }
-        log.info("mapType: {}",mapView.getMapType());
+//        log.info("mapType: {}",mapView.getMapType());
         mapViewRepo.save(mapView);
         return success(mapView);
 }
-    // 타입에 의해 바뀌는거 프론트도 해주기
 
     // 2. 타입이 색깔일 때
     @Operation(summary = "MapView의 색깔을 저장", description = "mapType이 color 일 때 해당 행정구역의 color의 색깔을 저장한다.")
@@ -76,7 +69,6 @@ public class MapViewController {
     public ApiResult<MapView> postViewColor(@CurrentUser String userId,
                                        @PathVariable Integer loc,
                                        @RequestBody MapViewDto mapViewDto) throws Exception {
-//        MapView mapView = new MapView(color);
         if(!mapViewRepo.findByUserAndLoc(userId, loc).getMapType().equals("color")) throw new Exception("It's not color. 잘못된 요청 입니다.");
         MapView mapView = mapViewRepo.findByUserAndLoc(userId, loc);
         mapView.setColor(mapViewDto.getColor());

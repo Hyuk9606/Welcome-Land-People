@@ -1,9 +1,8 @@
-package com.ssafy.boonmoja.fileupload.dto;
+package com.ssafy.boonmoja.api.dto.mapView;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.bson.types.Binary;
 
 @Setter
 @Getter
