@@ -3,7 +3,10 @@ package com.ssafy.boonmoja.api.controller.contents;
 import com.ssafy.boonmoja.api.entity.contents.Contents;
 import com.ssafy.boonmoja.api.service.ContentsService;
 import com.ssafy.boonmoja.api.service.UserService;
-import com.ssafy.boonmoja.common.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,6 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static com.ssafy.boonmoja.utils.ApiUtils.ApiResult;
+import static com.ssafy.boonmoja.utils.ApiUtils.success;
+
+@Tag(name = "Contents", description = "컨텐츠 관리 API")
 @RestController
 @RequestMapping("/api/v1/contents")
 @RequiredArgsConstructor
@@ -25,15 +32,21 @@ public class ContentsController {
     
     
     /**
-     * @param select  ["지역", "상호"]
-     * @param label   ["관광지", "쇼핑", "숙박", "음식", ... ]
+     * @param select ["지역", "상호"]
+     * @param label  ["관광지", "쇼핑", "숙박", "음식", ... ]
      * @param query  검색어
      */
+    @Operation(summary = "컨텐츠 검색", description = "URL에 담긴 변수와 일치하는 항목을 검색합니다.")
+    @Parameters({
+            @Parameter(name = "select", description = "지역 or 상호"),
+            @Parameter(name = "label", description = "[\"관광지\", \"쇼핑\", \"숙박\", \"음식\", ... ]"),
+            @Parameter(name = "query", description = "검색할 단어")
+    })
     @GetMapping("/search/{select}/{label}/{query}")
     @PreAuthorize("hasAuthority('ROLE_USER')")
-    public ApiResponse getContentsList(@PathVariable String select,
-                                       @PathVariable String label,
-                                       @PathVariable String query) {
+    public ApiResult<List<Contents>> getContentsList( @PathVariable String select,
+                                                      @PathVariable String label,
+                                                      @PathVariable String query) {
         List<Contents> contentsList = null;
         if (select.equals("지역")) {
             contentsList = contentsService.getContentsEqualLabelAndAddress(label, query);
@@ -41,8 +54,8 @@ public class ContentsController {
             contentsList = contentsService.getContentsEqualLabelAndTitle(label, query);
         }
         log.info("Get {} list contents label {} include {} : {}", select, label, query, contentsList);
-        log.trace("{}",query);
-        return ApiResponse.success("data", contentsList);
+        log.trace("{}", query);
+        return success(contentsList);
     }
     
     

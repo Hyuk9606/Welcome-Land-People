@@ -16,6 +16,10 @@
         </encoder>
     </appender>
 
+    <logger name="org.springframework" level="info">
+        <appender-ref ref="CONSOLE"  />
+    </logger>
+
     <logger name="com.ssafy.boonmoja" level="info">
         <appender-ref ref="CONSOLE"  />
     </logger>

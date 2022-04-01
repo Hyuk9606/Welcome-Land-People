@@ -3,6 +3,11 @@ spring:
         activate:
             on-profile: dev
     # ??? ?? ??
+#    sql:
+#        init:
+#            mode: always
+#            platform: mysql
+#            continue-on-error: true
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://localhost:3306/boonmoja?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
@@ -17,6 +22,8 @@ spring:
             driver-class-name: ${spring.datasource.driver-class-name}
             data-source-properties:
                 rewriteBatchedStatements: true
+
+
     # JPA ??
     jpa:
         generate-ddl: true
@@ -32,7 +39,8 @@ spring:
                 jdbc.batch_size: 20
                 order_inserts: true
                 order_updates: true
-#                format_sql: true
+#        defer-datasource-initialization: true
+    #                format_sql: true
     # Security OAuth
     security:
         oauth2.client:
@@ -97,6 +105,22 @@ app:
     oauth2:
         authorizedRedirectUris:
             - http://localhost:3000/oauth/redirect
+springdoc:
+    version: '@project.version@'
+    api-docs:
+        path: /v3/api-docs
+    default-consumes-media-type: application/json
+    default-produces-media-type: application/json
+    swagger-ui:
+        operations-sorter: alpha
+        tags-sorter: alpha
+        path: /swagger-ui.html
+        disable-swagger-default-url: true
+        display-query-params-without-oauth2: true
+        persistAuthorization: true
+    paths-to-match:
+        - /**
+        - /test/**
 
 
 ---
@@ -154,7 +178,6 @@ spring:
                     scope:
                         - nickname
                         - email
-                    #                        - profile_image
                     clientName: Naver
                 kakao:
                     clientId: 'ad9e48f30c01a6eb33c7af2adcb2a0a1'
@@ -198,3 +221,20 @@ app:
     oauth2:
         authorizedRedirectUris:
             - http://j6c207.p.ssafy.io:3000/oauth/redirect
+
+springdoc:
+    version: '@project.version@'
+    api-docs:
+        path: /v3/api-docs
+    default-consumes-media-type: application/json
+    default-produces-media-type: application/json
+    swagger-ui:
+        operations-sorter: alpha
+        tags-sorter: alpha
+        path: /swagger-ui.html
+        disable-swagger-default-url: true
+        display-query-params-without-oauth2: true
+        persistAuthorization: true
+    paths-to-match:
+        - /**
+        - /test/**

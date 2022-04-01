@@ -12,6 +12,7 @@ import com.ssafy.boonmoja.oauth.token.AuthTokenProvider;
 import com.ssafy.boonmoja.utils.CookieUtil;
 import com.ssafy.boonmoja.utils.HeaderUtil;
 import io.jsonwebtoken.Claims;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
+@Tag(name = "OAuth2", description = "로그인 관련 API")
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor

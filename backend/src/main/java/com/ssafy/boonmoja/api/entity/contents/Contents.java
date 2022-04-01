@@ -29,7 +29,7 @@ public class Contents {
     @Column(name="ROAD_ADDRESS")
     private String roadAddress;
     
-    @Column(name="INTRODUCTION")
+    @Column(name="INTRODUCTION",length = 1000)
     private String introduction;
     
     @Column(name="LATITUDE")
