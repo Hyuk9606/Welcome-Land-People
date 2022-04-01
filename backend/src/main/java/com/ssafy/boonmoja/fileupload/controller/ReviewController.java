@@ -34,15 +34,6 @@ public class ReviewController {
     private final ReviewRepository reviewRepo;
     private final ReviewService reviewService;
 
-    // dto 형태로 텍스트만 넣기
-//    @PostMapping("/text")
-//    public String addReviewImage(@RequestBody ReviewDto reviewDto){
-//        Review review = new Review(reviewDto);
-//        reviewRepo.save(review);
-//        return review.getId();
-//    }
-
-    // text, image vaule값은 입력받지 않아도 key는 있어야함
     @Operation(summary = "여행 리뷰 올리기", description = "여행번호로 여행리뷰(이미지,텍스트)를 업로드한다.")
     @Parameters({
             @Parameter(name = "travel", description = "여행번호"),
@@ -53,7 +44,7 @@ public class ReviewController {
     public ApiResult<Review> addReviews(@PathVariable Long travel, @RequestParam("text") String text, @RequestParam("image") List<MultipartFile> image) throws Exception {
         // 프론트에서 이미지를 배열타입으로 보냄
         Review reviewResult;
-        // 해당 여행이 없을 경우
+        // 아직 해당 여행 리뷰가 없을 경우
         if(reviewRepo.findByTravel(travel) == null){
             if(text.equals("") && image.get(0).isEmpty()) throw new Exception("저장할 내용이 없습니다.");
             Review review = new Review(travel,text);
@@ -71,7 +62,7 @@ public class ReviewController {
         //log.info("photoTest: {},{}", id, text);
     }
 
-    // travel id로 리뷰보기
+    // travel id로 여행리뷰보기
     @Operation(summary = "여행 리뷰 조회", description = "여행번호로 여행리뷰(이미지,텍스트)를 조회한다.")
     @Parameters({
             @Parameter(name = "travel", description = "여행번호")
@@ -120,7 +111,6 @@ public class ReviewController {
         return success(reviewResult);
         //log.info("photoTest: {},{}", id, text);
     }
-
 
     // 텍스트 수정
     @Operation(summary = "여행 리뷰 텍스트 수정하기", description = "여행번호로 여행 텍스트리뷰를 수정한다.")
