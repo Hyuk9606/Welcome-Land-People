@@ -7,7 +7,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.Repository;
 
 public interface ReviewRepository extends MongoRepository<Review, String> {
-    void deleteByText(String text);
-    void deleteById(Long id);
+    void deleteByTravel(Long travel);
     Review findByTravel(Long travel);
 }

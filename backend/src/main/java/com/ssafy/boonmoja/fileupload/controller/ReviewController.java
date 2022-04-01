@@ -1,47 +1,84 @@
 package com.ssafy.boonmoja.fileupload.controller;
 
-import com.ssafy.boonmoja.api.entity.user.User;
-import com.ssafy.boonmoja.api.repository.travel.DayRepository;
-import com.ssafy.boonmoja.api.repository.user.UserRepository;
-import com.ssafy.boonmoja.common.ApiResponse;
-import com.ssafy.boonmoja.fileupload.dto.ReviewDto;
+import com.ssafy.boonmoja.fileupload.dto.ReviewResDto;
 import com.ssafy.boonmoja.fileupload.model.Review;
 import com.ssafy.boonmoja.fileupload.repository.ReviewRepository;
 import com.ssafy.boonmoja.fileupload.service.ReviewService;
-import com.ssafy.boonmoja.oauth.annotation.CurrentUser;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.minidev.json.JSONObject;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
-import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Base64;
+import java.util.LinkedList;
+import java.util.List;
+
+import static com.ssafy.boonmoja.utils.ApiUtils.ApiResult;
+import static com.ssafy.boonmoja.utils.ApiUtils.success;
 
 
 // CTRL + ALT + L : 코드 정렬
-@Slf4j
-@RequiredArgsConstructor    // DI
+@Slf4j  // 로깅
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/review")
 //@PreAuthorize("hasAuthority('ROLE_USER')")
 public class ReviewController {
 
-    private final UserRepository userRepo;
-    private final DayRepository dayRepo;
     private final ReviewRepository reviewRepo;
     private final ReviewService reviewService;
 
+    // dto 형태로 텍스트만 넣기
+//    @PostMapping("/text")
+//    public String addReviewImage(@RequestBody ReviewDto reviewDto){
+//        Review review = new Review(reviewDto);
+//        reviewRepo.save(review);
+//        return review.getId();
+//    }
+
+    // text, image vaule값은 입력받지 않아도 key는 있어야함
+    @Operation(summary = "여행 리뷰 올리기", description = "여행번호로 여행리뷰(이미지,텍스트)를 업로드한다.")
+    @Parameters({
+            @Parameter(name = "travel", description = "여행번호"),
+            @Parameter(name = "text", description = "텍스트"),
+            @Parameter(name = "image", description = "여행 사진")
+    })
+    @PostMapping("/{travel}")
+    public ApiResult<Review> addReviews(@PathVariable Long travel, @RequestParam("text") String text, @RequestParam("image") List<MultipartFile> image) throws Exception {
+        // 프론트에서 이미지를 배열타입으로 보냄
+        Review reviewResult;
+        // 해당 여행이 없을 경우
+        if(reviewRepo.findByTravel(travel) == null){
+            if(text.equals("") && image.get(0).isEmpty()) throw new Exception("저장할 내용이 없습니다.");
+            Review review = new Review(travel,text);
+            List<Binary> imageList = new LinkedList<>();
+            if(image != null){
+                for (MultipartFile m : image) {
+                    if(!m.isEmpty()) imageList.add(new Binary(BsonBinarySubType.BINARY, m.getBytes()));
+                }
+                review.setImage(imageList);
+            }
+            reviewResult = reviewRepo.save(review);
+        }else throw new Exception("잘못된 요청입니다. 이미 기록한 여행이에요.");
+
+        return success(reviewResult);
+        //log.info("photoTest: {},{}", id, text);
+    }
+
     // travel id로 리뷰보기
-    // success
-    @GetMapping("/{travelId}")
-    public Map getReivewBoard(@PathVariable Long travelId) {
-        Review review = reviewRepo.findByTravel(travelId);
+    @Operation(summary = "여행 리뷰 조회", description = "여행번호로 여행리뷰(이미지,텍스트)를 조회한다.")
+    @Parameters({
+            @Parameter(name = "travel", description = "여행번호")
+    })
+    @GetMapping("/{travel}")
+    public ApiResult<ReviewResDto> getReivewBoard(@PathVariable Long travel) {
+        Review review = reviewRepo.findByTravel(travel);
         String text = review.getText();
         List<String> imageList = new LinkedList<>();
         for (Binary b : review.getImage()) {
@@ -50,79 +87,94 @@ public class ReviewController {
         // Base64를 사용하는 이유 : XML, JSON, REST API등 문자열 기반 데이터를 주고받는 환경에서 multi-form을 다룰경우 함께 사용된다.
         // 즉, 여기서는 text와 image 같이 보내주기 위해서 base64로 이미지를 보낸다.
         // 프론트에서 나타내기 위해 byte[] 로 반환된 이미지 데이터를 Base64 문자열로 변환
-        JSONObject object = new JSONObject();
-        object.put("image",imageList);
-        object.put("text",text);
-
-        return object;
+//        JSONObject object = new JSONObject();
+//        object.put("image",imageList);
+//        object.put("text",text);
+        ReviewResDto reviewResDto = new ReviewResDto(text,imageList,travel);
+        return success(reviewResDto);
     }
 
-// dto 형태로 텍스트만 넣기
-//    @PostMapping("/text")
-//    public String addReviewImage(@RequestBody ReviewDto reviewDto){
-//        Review review = new Review(reviewDto);
-//        reviewRepo.save(review);
-//        return review.getId();
-//    }
-
-    // success
-    // text, image vaule값은 입력받지 않아도 key는 있어야함
-    @PostMapping()
-    public Review addReviews(@RequestParam("travelId") Long travelId,@RequestParam("text") String text, @RequestParam("image") List<MultipartFile> image) throws IOException {
+    /// 존재하는 리뷰일 때 이미지 추가하기
+    @Operation(summary = "여행 이미지 추가하기", description = "존재하는 리뷰일 때, 여행번호로 여행리뷰(이미지)를 추가한다.")
+    @Parameters({
+            @Parameter(name = "travel", description = "여행번호"),
+            @Parameter(name = "image", description = "여행 사진")
+    })
+    @PutMapping("/image/{travel}")
+    public ApiResult<Review> putReivewImage(@PathVariable Long travel, @RequestParam("image") List<MultipartFile> image) throws Exception {
         // 프론트에서 이미지를 배열타입으로 보냄
+        Review reviewResult;
+        if(reviewRepo.findByTravel(travel) != null){
+            Review review = reviewRepo.findByTravel(travel);
 
-        Review review = new Review(travelId,text);
-        List<Binary> imageList = new LinkedList<>();
-        if(image != null){
-            for (MultipartFile m : image) {
-                imageList.add(new Binary(BsonBinarySubType.BINARY, m.getBytes()));
+            List<Binary> imageList = reviewRepo.findByTravel(travel).getImage();
+            if(image != null){
+                for (MultipartFile m : image) {
+                    imageList.add(new Binary(BsonBinarySubType.BINARY, m.getBytes()));
+                }
+                review.setImage(imageList);
             }
-            review.setImage(imageList);
-        }
+            reviewResult = reviewRepo.save(review);
+        }else throw new Exception("잘못된 요청입니다. 수정할 리뷰가 없어요.");
 
-        review = reviewRepo.save(review);
-        return review;
-
-
+        return success(reviewResult);
         //log.info("photoTest: {},{}", id, text);
-
-        //return ApiResponse.success("data","OK");
     }
 
 
-    /// 안돼ㅐㅐㅐㅐ
-//    @PutMapping("/text/{id}")
-//    public Review  putReivewText(@PathVariable String id, @RequestBody ReviewDto reviewDto) {
-////        log.info("before update: {}",reviewRepo.findById(reviewSeq).get().getText());
-//////        String str = reviewService.updateReviewText(reviewSeq,reviewDto);
-//////        log.info("after update: {}", str);
-//
-//            Review review = reviewRepo.findById(id).get();
-//            review.setText(reviewDto.getText());
-//            reviewRepo.save(review);
-////            reviewRepo.deleteById(id);
-//
-//            return review;
-////        return reviewService.updateReviewText(id,reviewDto);
-////        Review review = reviewDto.toEntity();
-////        review.setId(id);
-////        reviewRepo.save(review);
-//
-////        return ApiResponse.success("data","OK");
-//    }
+    // 텍스트 수정
+    @Operation(summary = "여행 리뷰 텍스트 수정하기", description = "여행번호로 여행 텍스트리뷰를 수정한다.")
+    @Parameters({
+            @Parameter(name = "travel", description = "여행번호"),
+            @Parameter(name = "text", description = "텍스트"),
+            @Parameter(name = "image", description = "여행 사진")
+    })
+    @PutMapping("/text/{travel}")
+    public ApiResult<Review> putReivewText(@PathVariable Long travel, @RequestParam("text") String text) throws Exception {
+        Review reviewResult;
+        if(reviewRepo.findByTravel(travel) != null) {
+            Review review = reviewRepo.findByTravel(travel);
+            review.setText(text);
+            reviewResult = reviewRepo.save(review);
+        }else throw new Exception("잘못된 요청입니다. 수정할 리뷰가 없어요.");
 
-    //success
+        return success(reviewResult);
+        //log.info("photoTest: {},{}", id, text);
+    }
+
     // 사진하나씩삭제
-    @DeleteMapping("/{travelId}/{imageId}")
-    public void deleteReviewPhoto(@PathVariable Long travelId, @PathVariable int imageId){
-        reviewService.deleteImage(travelId,imageId);
+    @Operation(summary = "여행리뷰사진 하나씩 삭제하기", description = "여행번호와 여행이미지리스트번호로 사진을 삭제한다.")
+    @Parameters({
+            @Parameter(name = "travel", description = "여행번호"),
+            @Parameter(name = "image", description = "이미지번호")
+    })
+    @DeleteMapping("/{travel}/{imageId}")
+    public ApiResult<String> deleteReviewPhoto(@PathVariable Long travel, @PathVariable int imageId){
+        reviewService.deleteImage(travel,imageId);
+        return success("OK!!");
     }
 
+    //이미지만 전체 삭제
+    @Operation(summary = "선택한 여행리뷰의 모든사진 삭제하기", description = "여행번호로 해당 여행의 모든 사진을 삭제한다.")
+    @Parameters({
+            @Parameter(name = "travel", description = "여행번호"),
+    })
+    @DeleteMapping("/images/{travel}")
+    public ApiResult<String> deletAllReviewPhotos(@PathVariable Long travel){
+        Review review = reviewRepo.findByTravel(travel);
+        review.setImage(null);
+        return success("OK!!");
+    }
 
-    // success
-    @DeleteMapping("/{travelId}")
-    public void deleteAll(@PathVariable Long travelId){
-        reviewRepo.deleteById(travelId);
+    // 해당여행 리뷰(텍스트,이미지)전체삭제
+    @Operation(summary = "해당 여행 리뷰(텍스트,이미지)전체 삭제", description = "여행번호로 해당 여행의 모든 사진과 텍스트를 삭제한다.")
+    @Parameters({
+            @Parameter(name = "travel", description = "여행번호"),
+    })
+    @DeleteMapping("/{travel}")
+    public ApiResult<String> deleteAll(@PathVariable Long travel){
+        reviewRepo.deleteByTravel(travel);
+        return success("OK!!");
     }
 
 

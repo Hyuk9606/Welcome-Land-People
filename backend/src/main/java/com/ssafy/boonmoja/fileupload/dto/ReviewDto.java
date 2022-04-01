@@ -10,15 +10,9 @@ import org.bson.types.ObjectId;
 @Getter
 @NoArgsConstructor
 public class ReviewDto {
-//    private String reviewSeq;
+
     private String id;
     private String text;
     private Long travel;
-//    public Review toEntity(){
-//        Review review = new Review();
-////        review.setReviewSeq(reviewSeq);
-////        review.setReviewId(reviewId);
-//        review.setText(text);
-//        return review;
-//    }
+
 }
