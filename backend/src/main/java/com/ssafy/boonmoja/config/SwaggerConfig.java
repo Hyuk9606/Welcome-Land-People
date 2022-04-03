@@ -19,11 +19,10 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 public class SwaggerConfig {
 
-
     @Bean
     public GroupedOpenApi customAllOpenAPi() {
         String[] paths = {"/**"};
-
+        
         return GroupedOpenApi
                 .builder()
                 .group("API")
@@ -48,5 +47,4 @@ public class SwaggerConfig {
                         .bearerFormat("JWT")
                         .scheme("bearer"));
     }
-
 }

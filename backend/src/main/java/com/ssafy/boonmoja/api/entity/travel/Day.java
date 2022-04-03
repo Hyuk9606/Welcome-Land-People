@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Builder
+@ToString
 public class Day {
     
     @Id
