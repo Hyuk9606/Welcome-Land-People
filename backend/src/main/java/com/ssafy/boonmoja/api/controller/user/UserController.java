@@ -28,7 +28,7 @@ import static com.ssafy.boonmoja.utils.ApiUtils.success;
 
 @Tag(name = "user", description = "유저관리 API")
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/users")
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {

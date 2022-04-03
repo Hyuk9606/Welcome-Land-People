@@ -22,7 +22,7 @@ import static com.ssafy.boonmoja.utils.ApiUtils.success;
 
 @Tag(name = "Travel", description = "내 여행계획 관리 API")
 @RestController
-@RequestMapping("/api/v1/travel")
+@RequestMapping("/api/travel")
 @RequiredArgsConstructor
 @Slf4j
 @PreAuthorize("hasAuthority('ROLE_USER')")

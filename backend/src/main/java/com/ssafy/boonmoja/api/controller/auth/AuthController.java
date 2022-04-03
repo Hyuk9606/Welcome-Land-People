@@ -28,7 +28,7 @@ import java.util.Date;
 
 @Tag(name = "OAuth2", description = "로그인 관련 API")
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/auth")
 @RequiredArgsConstructor
 @Slf4j
 public class AuthController {

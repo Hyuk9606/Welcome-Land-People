@@ -22,7 +22,7 @@ import static com.ssafy.boonmoja.utils.ApiUtils.success;
 
 @Tag(name = "Contents", description = "컨텐츠 관리 API")
 @RestController
-@RequestMapping("/api/v1/contents")
+@RequestMapping("/api/contents")
 @RequiredArgsConstructor
 @Slf4j
 public class ContentsController {

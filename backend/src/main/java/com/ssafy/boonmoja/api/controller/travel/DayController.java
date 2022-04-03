@@ -19,7 +19,7 @@ import static com.ssafy.boonmoja.utils.ApiUtils.success;
 
 @Tag(name = "Day", description = "내 여행계획의 일정 관리 API")
 @RestController
-@RequestMapping("/api/v1/travel/day")
+@RequestMapping("/api/travel/day")
 @RequiredArgsConstructor
 @Slf4j
 @PreAuthorize("hasAuthority('ROLE_USER')")
