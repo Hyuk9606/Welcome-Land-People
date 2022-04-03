@@ -53,8 +53,8 @@ public class ContentsController {
         } else if (select.equals("상호")) {
             contentsList = contentsService.getContentsEqualLabelAndTitle(label, query);
         }
-        log.info("Get {} list contents label {} include {} : {}", select, label, query, contentsList);
-        log.trace("{}", query);
+        log.trace("Get {} list contents label {} include {} : {}", select, label, query, contentsList);
+        log.info("{}", query);
         return success(contentsList);
     }
     
