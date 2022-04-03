@@ -28,7 +28,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_DATABASE: "boonmoja"
-      MYSQL_HOST: "%"
       MYSQL_USER: "ssafy"
       MYSQL_PASSWORD: "1234"
     command:
