@@ -68,7 +68,7 @@ public class UserController {
             @Parameter(name = "userId", description = "유저의 아이디 ex) test@test.com"),
     })
     @PostMapping("/logout")
-    public ApiResult<String> logout(HttpServletRequest request, HttpServletResponse response, @RequestParam("user_id") String userId) {
+    public ApiResult<String> logout(HttpServletRequest request, HttpServletResponse response, @CurrentUser String userId) {
         log.info("로그아웃 - {}", userId);
         userRefreshTokenService.deleteToken(userId);
         CookieUtil.deleteCookie(request, response, "refresh_token");

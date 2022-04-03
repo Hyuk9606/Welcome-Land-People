@@ -66,6 +66,7 @@ public class AuthController {
         );
 
         long refreshTokenExpiry = appProperties.getAuth().getRefreshTokenExpiry();
+        log.info("expiry:{}",refreshTokenExpiry);
         AuthToken refreshToken = tokenProvider.createAuthToken(
                 appProperties.getAuth().getTokenSecret(),
                 new Date(now.getTime() + refreshTokenExpiry)
@@ -94,16 +95,18 @@ public class AuthController {
         // access token 확인
         String accessToken = HeaderUtil.getAccessToken(request);
         AuthToken authToken = tokenProvider.convertAuthToken(accessToken);
-        if (!authToken.validate()) {
-            return ApiResponse.invalidAccessToken();
-        }
-
+       
+        // access token이 만료되었다면 이미 유효하지 않으므로 검증하지 않아야함.
+//        if (!authToken.validate()) {
+//            return ApiResponse.invalidAccessToken();
+//        }
+        
         // expired access token 인지 확인
         Claims claims = authToken.getExpiredTokenClaims();
         if (claims == null) {
             return ApiResponse.notExpiredTokenYet();
         }
-
+        
         String userId = claims.getSubject();
         RoleType roleType = RoleType.of(claims.get("role", String.class));
 
@@ -112,13 +115,14 @@ public class AuthController {
                 .map(Cookie::getValue)
                 .orElse((null));
         AuthToken authRefreshToken = tokenProvider.convertAuthToken(refreshToken);
-
-        if (authRefreshToken.validate()) {
+        
+        if (!authRefreshToken.validate()) {
             return ApiResponse.invalidRefreshToken();
         }
 
         // userId refresh token 으로 DB 확인
         UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByUserIdAndRefreshToken(userId, refreshToken);
+        
         if (userRefreshToken == null) {
             return ApiResponse.invalidRefreshToken();
         }
@@ -129,7 +133,7 @@ public class AuthController {
                 roleType.getCode(),
                 new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
         );
-
+        log.info("refresh : new AccessToken {}",newAccessToken);
         long validTime = authRefreshToken.getTokenClaims().getExpiration().getTime() - now.getTime();
 
         // refresh 토큰 기간이 3일 이하로 남은 경우, refresh 토큰 갱신
