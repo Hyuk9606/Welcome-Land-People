@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Entity
 @Builder
+@ToString
 public class DayContents {
     
     @Id
@@ -35,5 +36,8 @@ public class DayContents {
     @JoinColumn(name="title", referencedColumnName = "title")
     @NotNull
     private Contents contents;
+    
+    @Column(name="DAY_CONTENTS_NO")
+    Integer dayContentsNo;
     
 }

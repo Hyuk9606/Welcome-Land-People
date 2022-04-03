@@ -3,6 +3,7 @@ package com.ssafy.boonmoja.api.entity.contents;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -11,7 +12,8 @@ import javax.persistence.*;
 @Entity
 @Builder
 @Table(name = "CONTENTS")
-public class Contents {
+public class Contents implements Serializable {
+    private static final long serialVersionUID = 1L;
     
     @Id
     @Column(name = "CONTENTS_ID")
