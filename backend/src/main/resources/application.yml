@@ -3,11 +3,6 @@ spring:
         activate:
             on-profile: dev
     # ??? ?? ??
-#    sql:
-#        init:
-#            mode: always
-#            platform: mysql
-#            continue-on-error: true
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://localhost:3306/boonmoja?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
@@ -22,7 +17,19 @@ spring:
             driver-class-name: ${spring.datasource.driver-class-name}
             data-source-properties:
                 rewriteBatchedStatements: true
-
+    second-datasource:
+        mongodb:
+            authentication-database: admin
+            username: root
+            password: root
+            database: boonmoja
+            port: 27017
+            host: localhost
+        servlet:
+            multipart:
+                max-file-size: 5MB
+                max-request-size: 5MB
+                enabled: true
 
     # JPA ??
     jpa:
@@ -39,8 +46,7 @@ spring:
                 jdbc.batch_size: 20
                 order_inserts: true
                 order_updates: true
-#        defer-datasource-initialization: true
-    #                format_sql: true
+#                format_sql: true
     # Security OAuth
     security:
         oauth2.client:
@@ -60,7 +66,6 @@ spring:
                     scope:
                         - nickname
                         - email
-#                        - profile_image
                     clientName: Naver
                 kakao:
                     clientId: 'ad9e48f30c01a6eb33c7af2adcb2a0a1'
@@ -70,7 +75,6 @@ spring:
                     redirectUri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
                     scope:
                         - profile_nickname
-#                        - profile_image
                         - account_email
                     clientName: Kakao
             # Provider ??
@@ -143,6 +147,20 @@ spring:
             driver-class-name: ${spring.datasource.driver-class-name}
             data-source-properties:
                 rewriteBatchedStatements: true
+
+    second-datasource:
+        mongodb:
+            authentication-database: admin
+            username: ssafy
+            password: 1234
+            database: boonmoja
+            port: 27017
+            host: j6c207.p.ssafy.io
+        servlet:
+            multipart:
+                max-file-size: 5MB
+                max-request-size: 5MB
+                enabled: true
     # JPA ??
     jpa:
         generate-ddl: true

@@ -69,10 +69,5 @@ public class ApiUtils {
         public T getResponse() {
             return response;
         }
-        
-        
     }
-    
-    
-    
 }

@@ -31,4 +31,5 @@ public class Day {
     @Builder.Default
     @OneToMany(mappedBy = "day")
     private List<DayContents> dayContents = new ArrayList<>();
+
 }

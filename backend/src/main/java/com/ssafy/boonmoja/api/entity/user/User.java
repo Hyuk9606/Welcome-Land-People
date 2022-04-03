@@ -27,23 +27,23 @@ public class User {
     @Column(name = "USER_SEQ")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userSeq;
-    
+
     @Column(name = "USER_ID", length = 64, unique = true)
     @NotNull
     @Size(max = 64)
     private String userId;
-    
+
     @Column(name = "USERNAME", length = 100)
     @NotNull
     @Size(max = 100)
     private String username;
-    
+
     @JsonIgnore
     @Column(name = "PASSWORD", length = 128)
     @NotNull
     @Size(max = 128)
     private String password;
-    
+
     //    @Column(name = "EMAIL", length = 512, unique = true)
     @Column(name = "EMAIL", length = 512)
     @NotNull
@@ -54,34 +54,34 @@ public class User {
 //    @NotNull
 //    @Size(max = 512)
 //    private String profileImageUrl;
-    
+
     @Column(name = "PROVIDER_TYPE", length = 20)
     @Enumerated(EnumType.STRING)
     private ProviderType providerType;
-    
+
     @Column(name = "ROLE_TYPE", length = 20)
     @Enumerated(EnumType.STRING)
     @NotNull
     private RoleType roleType;
-    
+
     @Column(name = "CREATED_AT")
     @NotNull
     private LocalDateTime createdAt;
-    
+
     @Column(name = "MODIFIED_AT")
     @NotNull
     private LocalDateTime modifiedAt;
-    
+
     @Builder.Default
     @OneToMany(mappedBy = "user")
     private List<UserContents> userContents = new ArrayList<>();
-    
+
     @Builder.Default
     @OneToMany
     @JoinColumn(name = "user_seq")
     private List<Travel> userTravels = new ArrayList<>();
-    
-    
+
+
     public User(
             @NotNull @Size(max = 64) String userId,
             @NotNull @Size(max = 100) String username,
@@ -104,7 +104,7 @@ public class User {
         this.modifiedAt = modifiedAt;
         this.userContents = userContents;
     }
-    
+
     @Override
     public String toString() {
         return "User{" +

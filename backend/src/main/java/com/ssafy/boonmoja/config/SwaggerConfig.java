@@ -18,8 +18,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @RequiredArgsConstructor
 public class SwaggerConfig {
-    
-    
+
     @Bean
     public GroupedOpenApi customAllOpenAPi() {
         String[] paths = {"/**"};
@@ -30,10 +29,10 @@ public class SwaggerConfig {
                 .pathsToMatch(paths)
                 .addOpenApiCustomiser(buildSecurityOpenApi()).build();
     }
-    
+
     public OpenApiCustomiser buildSecurityOpenApi() {
         // jwt token 을 한번 설정하면 header 에 값을 넣어주는 코드, 자세한건 아래에 추가적으로 설명할 예정
-        
+
         return OpenApi -> OpenApi.addSecurityItem(new SecurityRequirement().addList("jwt token").addList("refresh token"))
                 .getComponents().addSecuritySchemes("jwt token", new SecurityScheme()
                         .name("Authorization")
@@ -48,5 +47,4 @@ public class SwaggerConfig {
                         .bearerFormat("JWT")
                         .scheme("bearer"));
     }
-    
 }
