@@ -1,24 +1,19 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import OauthRedirect from '@/components/oauth/Redirect'
+import MainView from "../views/MainView.vue";
+import SearchView from "../views/SearchView.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
-    children: [
-      {
-        path: '/oauth/redirect',
-        name: 'OauthRedrect',
-        component: OauthRedirect
-      }
-    ]
+    component: MainView,
   },
-
+  {
+    path: "/search",
+    component: SearchView,
+  },
 ];
 
 const router = new VueRouter({

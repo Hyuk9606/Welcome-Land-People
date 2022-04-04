@@ -1,18 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import createPersistedState from "vuex-persistedstate";
-import account from "./modules/account";
+import mainView from "@/store/modules/mainView.js";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: { account },
-  // plguin: [createPersistedState({
-  //   storage: sessionStorage,
-  //   paths: ["account"]
-  // }),],
-  plugins: [ createPersistedState({ storage: sessionStorage }), ],
+export const store = new Vuex.Store({
+  modules: {
+    mainView,
+  },
 });
