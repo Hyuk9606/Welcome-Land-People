@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -35,7 +36,20 @@ public class DayService {
     @Transactional
     public void saveDay(String userId, Long travelSeq, List<DayDto> dayDtoList) {
         User user = userRepository.findByUserId(userId);
-        Travel travel = travelRepository.findByTravelSeq(travelSeq);
+        Travel travel = null;
+        int maxDay = 0;
+        if(travelSeq == null){
+            Travel tmp = Travel.builder()
+                    .user(user)
+                    .travelTitle("제목을 입력하세요")
+                    .startAt(LocalDate.now())
+                    .endAt(LocalDate.now())
+                    .build();
+            travel = travelRepository.save(tmp);
+        }
+        else{
+            travel = travelRepository.findByTravelSeq(travelSeq);
+        }
         
         if (!travel.getUser().getUserSeq().equals(user.getUserSeq())) return;
         
@@ -45,15 +59,18 @@ public class DayService {
             for (Day day : days) {
                 dayContentsRepository.deleteAllByDay(day);
                 dayRepository.delete(day);
-
             }
         }
+        
         Collections.sort(dayDtoList, (o1, o2) -> {
             if (o1.getDay().equals(o2.getDay())) return Integer.compare(o1.getDayContentsNo(), o2.getDayContentsNo());
             return Integer.compare(o1.getDay(), o2.getDay());
         });
         
-//        log.info("Save day sorted list : {}", dayDtoList);
+        maxDay = dayDtoList.get(dayDtoList.size()-1).getDay();
+        travel.setEndAt(travel.getStartAt().plusDays(maxDay-1));
+        travelRepository.save(travel);
+        
         Day day = null;
         for (DayDto dayDto : dayDtoList) {
             Contents contents = contentsRepository.findByContentsIdIs(dayDto.getContentsId());
