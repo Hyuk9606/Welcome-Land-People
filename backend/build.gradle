@@ -38,6 +38,12 @@ dependencies {
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+	// Swagger 관련 설정
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.4'
+	// Swagger API 문서에서, Spring-Security 인자들 없애줌
+	implementation 'org.springdoc:springdoc-openapi-security:1.6.4'
+
 }
 
 tasks.named('test') {

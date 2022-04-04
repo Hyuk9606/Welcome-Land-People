@@ -2,7 +2,7 @@ import axios from "axios";
 import store from "../store/index";
 import handler from "./res-handler";
 // const URI_PREFIX = ""
-const URI_PREPENDER = "/api/v1";
+const URI_PREPENDER = "/api";
 const wrap = (url) => `${URI_PREPENDER}${url}`;
 const appendAuth = (config) => {
   const token = store.getters.token;
@@ -31,10 +31,7 @@ export default {
   },
   join(url, body, success, fail = (err) => err.response.data.message) {
     console.log(wrap(url));
-    axios
-      .post(wrap(url), body)
-      .then(handler.handle(success))
-      .catch(fail);
+    axios.post(wrap(url), body).then(handler.handle(success)).catch(fail);
   },
   put(url, body, success, fail = (err) => err.response.data.message, config) {
     axios

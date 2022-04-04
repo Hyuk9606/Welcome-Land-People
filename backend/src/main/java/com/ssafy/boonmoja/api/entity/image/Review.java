@@ -1,21 +1,14 @@
-package com.ssafy.boonmoja.fileupload.model;
+package com.ssafy.boonmoja.api.entity.image;
 
 import com.mongodb.lang.Nullable;
-import com.ssafy.boonmoja.api.entity.travel.Day;
-import com.ssafy.boonmoja.api.entity.user.User;
-import com.ssafy.boonmoja.fileupload.dto.ReviewDto;
+import com.ssafy.boonmoja.api.dto.review.ReviewDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 import org.bson.types.Binary;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.util.List;

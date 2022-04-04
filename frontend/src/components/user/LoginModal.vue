@@ -10,12 +10,21 @@
             </div>
             <div class="modal-body">
               <div class="social-login-container">
-                <template v-for='social in socials' >
-									<a :href='socialLoginUrl(social.socialType)' class="social_btn" :key="social.socialType">
-										<img :src='social.src' :style='{width: social.width, height: social.height}' alt="" class="social_login">
-										{{social.comment}}
-									</a>
-								</template>
+                <template v-for="social in socials">
+                  <a
+                    :href="socialLoginUrl(social.socialType)"
+                    class="social_btn"
+                    :key="social.socialType"
+                  >
+                    <img
+                      :src="social.src"
+                      :style="{ width: social.width, height: social.height }"
+                      alt=""
+                      class="social_login"
+                    />
+                    {{ social.comment }}
+                  </a>
+                </template>
               </div>
               <div class="or-separator">
                 <span class="or-text">OR</span>
@@ -42,25 +51,29 @@
                   />
                 </div>
                 <div class="form-item">
-                  <button @click="login" class="btn btn-block btn-primary">로그인</button>
+                  <button @click="login" class="btn btn-block btn-primary">
+                    로그인
+                  </button>
                 </div>
               </div>
             </div>
-						<div class="modal-footer">
-							<button class="btn btn-danger" @click='$emit("onCloseModal")'>닫기</button>
-						</div>
+            <div class="modal-footer">
+              <button class="btn btn-danger" @click="$emit('onCloseModal')">
+                닫기
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-		<div class="modal-backdrop" :class='{show:isOpen}'></div>
+    <div class="modal-backdrop" :class="{ show: isOpen }"></div>
   </div>
 </template>
 
 <script scope>
-import $ from '@/utils'
-import accountApi from '@/api/account'
-import { mapActions, mapMutations } from 'vuex'
+import $ from "@/utils";
+import accountApi from "@/api/account";
+import { mapActions, mapMutations } from "vuex";
 export default {
   props: ["isOpen"],
   data() {
@@ -106,7 +119,7 @@ export default {
       }
       accountApi.login(
         {
-          id: this.id,
+          userId: this.id,
           password: this.password,
           socialType: "LOCAL",
         },
