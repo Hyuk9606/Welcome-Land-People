@@ -1,5 +1,5 @@
 <template>
-  <header class="container">
+  <header>
     <h1>&nbsp&nbsp&nbsp&nbsp Title</h1>
     <nav class="login"><i class="fa-solid fa-circle-user fa-2x user"></i></nav>
   </header>
@@ -10,10 +10,6 @@ export default {};
 </script>
 
 <style scoped>
-.container {
-  width: 100%;
-  height: 160px;
-}
 .login {
   float: left;
   position: relative;

@@ -81,7 +81,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      page: 0,
+    };
+  },
+};
 </script>
 
 <style scoped>
