@@ -54,7 +54,7 @@ public class DayController {
                     "]\n")
     })
     @PostMapping(value = "/{travelSeq}")
-    public ApiResult<String> addDay(@CurrentUser String userId,
+    public ApiResult<String> saveDay(@CurrentUser String userId,
                                     @PathVariable Long travelSeq,
                                     @RequestBody List<DayDto> dayDtoList) {
         dayService.saveDay(userId, travelSeq, dayDtoList);
