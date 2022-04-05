@@ -46,7 +46,7 @@ export default {
       this.isScrollTop = window.scrollY === 0;
     });
     window.onload = function () {
-      console.log(process.env.VUE_APP_FRONTEND_PORT);
+      console.log(process.env);
     };
   },
   methods: {
