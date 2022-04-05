@@ -53,6 +53,8 @@
 <script>
 import * as d3 from "d3";
 import ModalComp from "@/components/ModalComp.vue";
+// import axios from "axios";
+import { mapGetters } from "vuex";
 
 const MAP_GEOJSON = require("@/rjeju.geo.json");
 
@@ -62,21 +64,21 @@ export default {
       area: "",
       areaCode: 0,
       centered: 0,
-      colors: {
-        3394: { colr: "#ffffff" },
-        3395: { colr: "#ffffff" },
-        3396: { colr: "#ffffff" },
-        3397: { colr: "#ffffff" },
-        3398: { colr: "#ffffff" },
-        3400: { colr: "#ffffff" },
-        3401: { colr: "#ffffff" },
-        3420: { colr: "#ffffff" },
-        3421: { colr: "#ffffff" },
-        3422: { colr: "#ffffff" },
-        3423: { colr: "#ffffff" },
-        3424: { colr: "#ffffff" },
-        3425: { colr: "#ffffff" },
-      },
+      // colors: {
+      //   3394: { colr: "#ffffff" },
+      //   3395: { colr: "#ffffff" },
+      //   3396: { colr: "#ffffff" },
+      //   3397: { colr: "#ffffff" },
+      //   3398: { colr: "#ffffff" },
+      //   3400: { colr: "#ffffff" },
+      //   3401: { colr: "#ffffff" },
+      //   3420: { colr: "#ffffff" },
+      //   3421: { colr: "#ffffff" },
+      //   3422: { colr: "#ffffff" },
+      //   3423: { colr: "#ffffff" },
+      //   3424: { colr: "#ffffff" },
+      //   3425: { colr: "#ffffff" },
+      // },
       showModal: false,
       selectFill: true,
       selectPhoto: false,
@@ -92,7 +94,7 @@ export default {
       const color = d.path[0]._prevClass;
       const ncolor = "#" + color.substring(2, 8);
       d3.select(this.current).style("fill", ncolor);
-      this.colors[this.areaCode].colr = ncolor;
+      this.mapColors[this.areaCode].colr = ncolor;
     },
     close() {
       this.showModal = false;
@@ -111,8 +113,9 @@ export default {
     partyColor(code) {
       let color = null;
       const localSeatCode = code;
-      if (localSeatCode in this.colors) {
-        color = this.colors[localSeatCode].colr;
+      if (localSeatCode in this.mapColors) {
+        color = this.mapColors[localSeatCode].colr;
+        console.log("색상", color);
       }
       return color;
     },
@@ -191,6 +194,14 @@ export default {
   },
   mounted() {
     this.drawMap();
+  },
+  computed: {
+    ...mapGetters("mainView", ["getColors"]),
+  },
+  created() {
+    console.log("확인", this.getColors[3398].colr);
+    // ...mapActions("mainView", ["GET_MAPVIEWINFO"]);
+    this.$store.dispatch("GET_MAPVIEWINFO");
   },
 };
 </script>

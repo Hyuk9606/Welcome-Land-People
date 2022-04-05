@@ -18,7 +18,6 @@ import ReviewDelete from "../components/review/ReviewDelete.vue";
 import ReviewRead from "../components/review/ReviewRead.vue";
 import ReviewUpdate from "../components/review/ReviewUpdate.vue";
 
-
 Vue.use(VueRouter);
 
 const routes = [
