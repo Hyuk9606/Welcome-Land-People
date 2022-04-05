@@ -23,6 +23,6 @@ export default {
   border-radius: 20px;
   width: 70%;
   height: 100%;
-  margin: 30px 15px 15px 0;
+  margin-right: 15px;
 }
 </style>
