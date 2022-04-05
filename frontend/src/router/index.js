@@ -17,6 +17,7 @@ import ReviewCreate from "../components/review/ReviewCreate.vue";
 import ReviewDelete from "../components/review/ReviewDelete.vue";
 import ReviewRead from "../components/review/ReviewRead.vue";
 import ReviewUpdate from "../components/review/ReviewUpdate.vue";
+import OauthRedirect from "@/components/oauth/Redirect";
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,13 @@ const routes = [
   {
     path: "/",
     component: MainView,
+    children: [
+      {
+        path: "/oauth/redirect",
+        name: "OauthRedrect",
+        component: OauthRedirect,
+      },
+    ],
   },
   {
     path: "/search",

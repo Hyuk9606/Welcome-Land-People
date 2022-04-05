@@ -11,7 +11,6 @@ import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,18 +30,18 @@ public class TravelController {
     private final UserService userService;
     private final TravelService travelService;
     
-    @PostMapping
-    @Operation(summary = "여행계획 등록", description = "여행계획 등록하기 {\n" +
-            "    \"travelTitle\":\"여행계획 이름\",\n" +
-            "    \"startAt\":\"2022-04-01\",\n" +
-            "    \"endAt\":\"2022-04-05\"\n" +
-            "}")
-    public ApiResult<String> insertTravel(@CurrentUser String userId, @DateTimeFormat(pattern = "YYYY-MM-DD") @RequestBody Travel travel) {
-        log.info("travel - {}", travel);
-        travelService.insertTravel(userId, travel);
-        
-        return success("OK!!");
-    }
+//    @PostMapping
+//    @Operation(summary = "여행계획 등록", description = "여행계획 등록하기 {\n" +
+//            "    \"travelTitle\":\"여행계획 이름\",\n" +
+//            "    \"startAt\":\"2022-04-01\",\n" +
+//            "    \"endAt\":\"2022-04-05\"\n" +
+//            "}")
+//    public ApiResult<String> insertTravel(@CurrentUser String userId, @DateTimeFormat(pattern = "YYYY-MM-DD") @RequestBody Travel travel) {
+//        log.info("travel - {}", travel);
+//        travelService.insertTravel(userId, travel);
+//
+//        return success("OK!!");
+//    }
     
     @GetMapping
     @Operation(summary = "내 여행계획 목록 조회", description = "내가 만든 여행계획 목록 조회")

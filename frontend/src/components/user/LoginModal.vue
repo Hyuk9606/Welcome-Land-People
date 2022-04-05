@@ -50,6 +50,22 @@
                     @keyup.enter="login"
                   />
                 </div>
+
+                <button
+                  @click="$emit('onOpenSignUpModal')"
+                  class="btn btn-block"
+                  style="
+                    color: #fff;
+                    background-color: #5fc02b;
+                    border-color: #5fc02b;
+                    font-size: 14px;
+                    border-radius: 4px;
+                    height: 45px;
+                    margin-bottom: 5px;
+                  "
+                >
+                  회원가입
+                </button>
                 <div class="form-item">
                   <button @click="login" class="btn btn-block btn-primary">
                     로그인
@@ -74,6 +90,9 @@
 import $ from "@/utils";
 import accountApi from "@/api/account";
 import { mapActions, mapMutations } from "vuex";
+
+const account = "account";
+
 export default {
   props: ["isOpen"],
   data() {
@@ -109,8 +128,8 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["fetchUser"]),
-    ...mapMutations(["setToken"]),
+    ...mapActions(account, ["fetchUser"]),
+    ...mapMutations(account, ["setToken"]),
     login() {
       if (this.isProcess) return;
       if (this.id.trim() === "" || this.password.trim() === "") {
@@ -119,7 +138,7 @@ export default {
       }
       accountApi.login(
         {
-          userId: this.id,
+          id: this.id,
           password: this.password,
           socialType: "LOCAL",
         },
