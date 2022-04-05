@@ -57,6 +57,9 @@
         }
       ],
       "no-mixed-spaces-and-tabs": 0
+    },
+    "globals": {
+      "kakao": false
     }
   },
   "browserslist": [

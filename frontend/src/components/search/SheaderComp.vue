@@ -10,23 +10,19 @@
     <div>
       <v-container fluid>
         <v-row>
-          <v-col class="d-flex" cols="12" sm="3">
+          <v-col class="d-flex select" cols="12" sm="3">
             <v-select :items="items" label="읍/면/동" dense solo></v-select>
           </v-col>
-          <v-col class="d-flex" cols="12" sm="9">
-            <div class="inputDiv">
-              <input type="search" class="searchInput" />
-              <i class="fa-2x fa-solid fa-magnifying-glass"></i>
-            </div>
+          <v-col class="d-flex inputDiv" cols="12" sm="9">
+            <input type="search" class="searchInput" />
+            <i class="fa-2x fa-solid fa-magnifying-glass"></i>
           </v-col>
         </v-row>
         <v-card>
-          <v-tabs>
-            <v-tab>숙소</v-tab>
-            <v-tab>맛집</v-tab>
-            <v-tab>전시</v-tab>
-            <v-tab>바다</v-tab>
-          </v-tabs>
+          <v-btn color="orange" text> 숙소 </v-btn>
+          <v-btn color="orange" text> 맛집 </v-btn>
+          <v-btn color="orange" text> 전시 </v-btn>
+          <v-btn color="orange" text> 바다 </v-btn>
         </v-card>
       </v-container>
     </div>
@@ -74,15 +70,21 @@ img {
 }
 .inputDiv i {
   position: absolute;
-  right: 15px;
-  top: 8px;
+  right: 30px;
+  top: 20px;
   color: gray;
 }
-.v-tab {
-  font-size: 10px;
-  font-weight: bold;
+.select {
+  margin-top: 5px;
 }
-.v-tab.v-tab--active {
-  background-color: #faaf3a;
+.v-select {
+  border-radius: 20px;
+}
+.v-card {
+  background: #ffffff;
+}
+.v-card .v-btn {
+  font-size: 15px;
+  font-weight: bold;
 }
 </style>
