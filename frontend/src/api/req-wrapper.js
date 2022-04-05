@@ -1,22 +1,24 @@
 import axios from "axios";
-import store from "../store/index";
+import store from "../store/index.js";
 import handler from "./res-handler";
 // const URI_PREFIX = ""
+axios.defaults.baseURL =
+  process.env.VUE_APP_BACKEND_DOMAIN + ":" + process.env.VUE_APP_BACKEND_PORT;
 const URI_PREPENDER = "/api";
 const wrap = (url) => `${URI_PREPENDER}${url}`;
 const appendAuth = (config) => {
-  const token = store.getters.token;
+  const token = store.getters["account/token"];
   if (token) {
     if (!config) config = { headers: {} };
     if (!config.headers) config.headers = {};
-    config.headers.Authorization = `Bearer ${store.getters.token}`;
+    config.headers.Authorization = `Bearer ${store.getters["account/token"]}`;
   }
+
   return config;
 };
 
 export default {
   get(url, success, fail = (err) => err.response.data.message, config) {
-    console.log(url);
     axios
       .get(wrap(url), appendAuth(config))
       .then(handler.handle(success))
@@ -24,6 +26,7 @@ export default {
   },
   post(url, body, success, fail = (err) => err.response.data.message, config) {
     console.log(wrap(url));
+
     axios
       .post(wrap(url), body, appendAuth(config))
       .then(handler.handle(success))

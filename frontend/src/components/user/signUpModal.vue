@@ -9,9 +9,7 @@
               <button class="close" @click="$emit('onCloseModal')">X</button>
             </div>
             <div class="modal-body">
-              <div class="social-login-container">
-
-              </div>
+              <div class="social-login-container"></div>
               <div class="form-wrap">
                 <div class="form-item">
                   <input
@@ -35,6 +33,16 @@
                 </div>
                 <div class="form-item">
                   <input
+                    type="password"
+                    class="form-control"
+                    placeholder="비밀번호 확인"
+                    v-model="passwordCheck"
+                    @input="inputChanged"
+                    @keyup.enter="join"
+                  />
+                </div>
+                <div class="form-item">
+                  <input
                     type="text"
                     class="form-control"
                     placeholder="이름"
@@ -45,65 +53,81 @@
                 </div>
 
                 <div class="form-item">
-                  <button @click="join" class="btn btn-block btn-primary">등록</button>
+                  <button @click="join" class="btn btn-block btn-primary">
+                    등록
+                  </button>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-danger" @click='$emit("onCloseModal")'>닫기</button>
+              <button class="btn btn-danger" @click="$emit('onCloseModal')">
+                닫기
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-		<div class="modal-backdrop" :class='{show:isOpen}'></div>
+    <div class="modal-backdrop" :class="{ show: isOpen }"></div>
   </div>
 </template>
 
 <script>
-import $ from '@/utils'
-import accountApi from '@/api/account'
-import { mapActions, mapMutations } from 'vuex'
+import $ from "@/utils";
+import accountApi from "@/api/account";
+import { mapActions, mapMutations } from "vuex";
+
+const account = "account";
+
 export default {
   props: ["isOpen"],
   data() {
     return {
       id: "",
       password: "",
-      name:"",
+      passwordCheck: "",
+      name: "",
       isProcess: false,
       cannotLogin: false,
       isLoginFailed: false,
     };
   },
   methods: {
-    ...mapActions(["fetchUser"]),
-    ...mapMutations(["setToken"]),
+    ...mapActions(account, ["fetchUser"]),
+    ...mapMutations(account, ["setToken"]),
     join() {
       if (this.isProcess) return;
-      if (this.id.trim() === "" || this.password.trim() === "" || this.name.trim() === "") {
+      if (
+        this.id.trim() === "" ||
+        this.password.trim() === "" ||
+        this.name.trim() === "" ||
+        this.password.trim() != this.passwordCheck.trim()
+      ) {
         this.cannotLogin = true;
+        console.log("회원가입 실패");
         return;
       }
       accountApi.register(
         {
-          
-            "user_id": this.id,
-            "password": this.password,
-            "username":this.name
-          
+          userId: this.id,
+          password: this.password,
+          username: this.name,
+
           // socialType: "LOCAL",
         },
         (body) => {
           this.setToken(body.token);
           this.id = this.password = "";
           this.isProcess = false;
+          console.log("회원가입 성공");
           this.$emit("onCloseModal");
         },
         (err) => {
-          if (err.response.data.status === 401) {
-            this.isLoginFailed = true;
-          }
+          // if (err.response.data.status === 401) {
+          //   this.isLoginFailed = true;
+          // }
+          // console.log(err);
+          // alert("회원가입 실패");
         }
       );
     },

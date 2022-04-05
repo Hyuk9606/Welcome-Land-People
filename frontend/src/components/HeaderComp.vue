@@ -1,12 +1,58 @@
 <template>
   <header>
     <h1>&nbsp&nbsp&nbsp&nbsp Title</h1>
-    <nav class="login"><i class="fa-solid fa-circle-user fa-2x user"></i></nav>
+    <div>
+      <nav class="login">
+        <button v-if="!isLoggedIn" @click="$emit('onOpenLoginModal')">
+          <i class="fa-solid fa-circle-user fa-2x user"></i>
+        </button>
+
+        <button v-else @click="logout">
+          <!-- <span>{{ user.username }}님</span> -->
+          <i class="fa-solid fa-right-from-bracket fa-2x user"></i>
+        </button>
+      </nav>
+    </div>
   </header>
 </template>
 
 <script>
-export default {};
+import $ from "@/utils";
+import { mapGetters, mapActions } from "vuex";
+
+const account = "account";
+
+export default {
+  created() {
+    this.isLoggedIn && this.fetchUser();
+  },
+  methods: {
+    ...mapActions(account, ["fetchUser"]),
+    go(path) {
+      this.close();
+      if (this.$route.path !== path) this.$router.push(path);
+    },
+    close() {
+      this.isOpenAccountDropdown = false;
+    },
+    logout() {
+      this.close();
+      this.$emit("onLogout");
+    },
+  },
+  computed: {
+    ...mapGetters(account, ["token", "user"]),
+    isLoggedIn() {
+      return this.token != null;
+    },
+    isAdmin() {
+      return this.user && this.user.roleType === "ROLE_ADMIN";
+    },
+  },
+  directives: {
+    "click-outside": $.clickOutside(),
+  },
+};
 </script>
 
 <style scoped>
@@ -18,7 +64,7 @@ export default {};
   margin: 2.5rem 0 1.5rem;
 }
 .user {
-  position: absolute;
+  position: static;
   bottom: 0px;
 }
 h1 {

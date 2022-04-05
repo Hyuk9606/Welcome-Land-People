@@ -1,15 +1,15 @@
 <template>
-<div>
-</div>
+  <div></div>
 </template>
 
 <script>
 import { mapMutations, mapActions } from "vuex";
 
+const account = "account";
+
 export default {
   created() {
     const token = this.$route.query.token;
-    console.log("token", token);
     if (token) {
       this.setToken(token);
       this.fetchUser();
@@ -17,8 +17,8 @@ export default {
     this.$router.replace("/");
   },
   methods: {
-    ...mapActions(["fetchUser"]),
-    ...mapMutations(["setToken"]),
+    ...mapActions(account, ["fetchUser"]),
+    ...mapMutations(account, ["setToken"]),
   },
 };
 </script>
