@@ -1,9 +1,16 @@
 <template>
   <div class="parent_div">
     <div class="child_div_1">
+      <router-link to="/list">여행목록</router-link>
+    </div>
+    <div class="child_div_1">
+      <router-link to="/review">방문기</router-link>
+    </div>
+    <div class="child_div_1">
       <router-link to="/">메인페이지로 </router-link>
     </div>
-    <div class="child_div_2">
+
+    <div class="child_div_1">
       <router-link to="/">로그인</router-link>
     </div>
   </div>
@@ -21,7 +28,7 @@ export default {
   position: fixed;
   top: 1em;
   right: 1em;
-  width: 130px;
+  width: 230px;
   height: 10px;
   float: left;
 }

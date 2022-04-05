@@ -28,6 +28,7 @@ export default {
   font-size: 20px;
   counter-reset: #2c3e50;
   margin: 20px; */
+
   width: 100%;
   height: 100%;
   background-image: url("@/assets/images/sea.png");

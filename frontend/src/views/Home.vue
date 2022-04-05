@@ -1,19 +1,15 @@
 <template>
-  <div>
-    <header-comp
+  <div class="home">
+    <nav-bar
+      :stickyMode="stickyMode"
       @onOpenLoginModal="openLoginModal"
       @onOpenSignUpModal="openSignUpModal"
       @onLogout="logout"
-    ></header-comp>
-    <div class="container">
-      <jeju-comp></jeju-comp>
-      <start-comp></start-comp>
-      <share-comp></share-comp>
-    </div>
+    />
+    <router-view />
     <login-modal
       v-if="isLoginModalOpen"
       :isOpen="isLoginModalOpen"
-      @onOpenSignUpModal="openSignUpModal"
       @onCloseModal="closeLoginModal"
     />
     <sign-up-modal
@@ -21,32 +17,29 @@
       :isOpen="isSignUpModalOpen"
       @onCloseModal="closeSignUpModal"
     />
-    <router-view />
+
+    <div class="bp-main-container">
+      <section class="main-top-section">
+        <p>socialLogin</p>
+        <p v-if="isLoggedIn">userName : {{ username }}</p>
+        <p v-if="isLoggedIn">role : {{ roleType }}</p>
+      </section>
+    </div>
   </div>
 </template>
 
 <script>
-import HeaderComp from "@/components/HeaderComp.vue";
-import JejuComp from "../components/main/JejuComp.vue";
-import StartComp from "../components/main/StartComp.vue";
-import ShareComp from "../components/main/ShareComp.vue";
+import NavBar from "@/components/NavBar";
 import LoginModal from "@/components/user/LoginModal";
-import SignUpModal from "@/components/user/signUpModal";
+import signUpModal from "@/components/user/signUpModal";
 import accountApi from "../api/account";
 import { mapGetters, mapMutations } from "vuex";
 
 const account = "account";
 
 export default {
-  name: "MainView",
-  components: {
-    HeaderComp,
-    JejuComp,
-    StartComp,
-    ShareComp,
-    LoginModal,
-    SignUpModal,
-  },
+  name: "Home",
+  components: { NavBar, LoginModal, signUpModal },
   data() {
     return {
       isLoginModalOpen: false,
@@ -66,7 +59,6 @@ export default {
       this.isLoginModalOpen = true;
     },
     openSignUpModal() {
-      this.isLoginModalOpen = false;
       this.isSignUpModalOpen = true;
     },
     closeLoginModal() {
@@ -107,7 +99,15 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.bp-main-container .main-top-section {
   width: 100%;
+  height: 320px;
+  padding-top: 5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .bp-main-container .main-top-section .slogan-container {
+    padding-top: 70px;
+  }
 }
 </style>
