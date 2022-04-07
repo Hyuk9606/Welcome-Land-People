@@ -2,7 +2,7 @@
 
 
 
-### 어서와, 육지사람
+### ✋어서와, 육지사람
 
 ------
 
@@ -13,7 +13,7 @@
 
 
 
-### 팀원 소개 및 역할
+### 👩👨팀원 소개 및 역할
 
 ------
 
@@ -21,11 +21,11 @@
 | -------- | --------------------------- | --------------------------- | --------------------------- | --------------------------- | ----------------------- | --------------------------- |
 | Profile  | ![김신아](./Img/김신아.jpg) | ![김도연](./Img/김도연.png) | ![김소은](./Img/김소은.jpg) | ![유진주](./Img/유진주.jpg) | ![임혁](./Img/임혁.png) | ![황선주](./Img/황선주.jpg) |
 | Position | Leader & Backend            | Backend                     | Frontend                    | Backend                     | Backend                 | Frontend                    |
-| Git      |                             |                             |                             |                             |                         |                             |
+| Detailed | Hadoop - Mapreduce          | Hadoop - Flume              | Vue.js                      | Spring Boot, JPA, MongoDB   | Spring Boot, JPA, MySQL | Vue.js                      |
 
 
 
-### 주요 기능
+### 🌟주요 기능
 
 ------
 
@@ -33,7 +33,7 @@
 
 
 
-### 기술 스택
+### ⚒기술 스택
 
 ------
 
@@ -57,9 +57,7 @@
 
 
 
-### **Architecture**
-
-------
+**Architecture**
 
 ![architecture](./Img/architecture.PNG)
 
@@ -67,7 +65,7 @@
 
 
 
-### 형상관리 및 기획
+### 🛫형상관리 및 기획
 
 ------
 
@@ -101,10 +99,12 @@
 
 
 
+**산출물**
+
 | 구분           | 링크                                                         |
 | -------------- | ------------------------------------------------------------ |
 | Notion         | [notion](https://spectacled-wheel-dcf.notion.site/a7830f650ea3477bae637208e2372310) |
-| Documents      | [ppt]()                                                      |
+| Documents      | [ppt](./exec/분모자-최종발표.pdf)                            |
 | Git Convention | [notion-convention](https://spectacled-wheel-dcf.notion.site/Git-35e01ed053944aa282aeb2de3d985d21) |
 | Wire Frame     | [figma](https://www.figma.com/file/PxeNKNfnZpKTMSciW6EM5K/BoonMoJa?node-id=0%3A1) |
 
@@ -112,7 +112,7 @@
 
 
 
-### 디렉토리 구조
+### 📂디렉토리 구조
 
 ------
 
