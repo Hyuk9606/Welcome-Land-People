@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>&nbsp&nbsp&nbsp&nbsp Title</h1>
+    <h1>&nbsp&nbsp 어서와, 육지사람</h1>
     <div>
       <nav class="login">
         <button v-if="!isLoggedIn" @click="$emit('onOpenLoginModal')">
@@ -61,7 +61,7 @@ export default {
   position: relative;
   width: 5%;
   height: 70px;
-  margin: 2.5rem 0 1.5rem;
+  margin: 6rem 0 1.5rem;
 }
 .user {
   position: static;
@@ -71,8 +71,8 @@ h1 {
   float: left;
   width: 95%;
   color: #000000;
-  font-weight: 1000;
-  font-size: 70px;
+  font-weight: 900;
+  font-size: 80px;
   margin: 2.5rem 0 1.5rem;
   text-align: center;
 }

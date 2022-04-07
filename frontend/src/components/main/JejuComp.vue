@@ -21,7 +21,6 @@
         </div>
       </div>
       <div v-if="selectColor" slot="body">
-        <div>미리보기</div>
         <div>
           <span class="c-41ac6c" @click="changeColor"></span>
           <span class="c-ffca43" @click="changeColor"></span>

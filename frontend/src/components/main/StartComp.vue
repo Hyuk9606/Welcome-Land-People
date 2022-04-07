@@ -1,8 +1,8 @@
 <template>
   <div class="startContainer" style="height: 300px">
     <span @click="goSearch" class="startBtn">
-      내 여행
-      <img width="50px" height="50px" src="@/assets/images/character1.png" />
+      <span class="mytrip">내 여행</span>
+      <img width="70px" height="70px" src="@/assets/images/character1.png" />
     </span>
   </div>
 </template>
@@ -35,12 +35,16 @@ export default {
   background-color: #41ac6c;
   border-radius: 5px;
   margin: 0 auto;
-  text-align: center;
   font-size: 50px;
   font-weight: bold;
   color: white;
   display: block;
   cursor: pointer;
+  padding-left: 45px;
+  padding-top: 3px;
+}
+.startBtn img {
+  position: absolute;
 }
 .startBtn:hover {
   background: #368f5a;
