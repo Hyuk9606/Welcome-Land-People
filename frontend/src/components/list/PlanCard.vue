@@ -22,14 +22,42 @@
               class="pb-0"
               style="font-weight: bold; margin-top: 10px; margin-bottom: 10px"
             >
-              {{ details[index].start_at }} ~ {{ details[index].end_at }}
+              {{ detail.startAt }} ~ {{ detail.endAt }}
             </v-card-subtitle>
             <v-card-title class="card-erea center-row text-style">
-              {{ details[index].traval_title }}
+              {{ detail.travelTitle }}
             </v-card-title>
             <v-card-actions class="center-row">
-              <goto-plan></goto-plan>
-              <goto-review></goto-review>
+              <!-- <goto-plan></goto-plan> -->
+              <v-btn
+    @click="gotoPlan"
+    style="
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: large;
+      padding: 40px;
+      margin-right: 4px;
+    "
+    class="small-erea"
+    text
+  >
+    계획<br />보러가기
+  </v-btn>
+              <v-btn
+    @click="gotoReview(detail.travelSeq)"
+    style="
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: large;
+      padding: 40px;
+      margin-left: 4px;
+    "
+    class="small-erea"
+    text
+  >
+    방문기<br />보러가기
+  </v-btn>
+              <!-- <goto-review></goto-review> -->
             </v-card-actions>
           </v-card>
         </v-col>
@@ -43,12 +71,10 @@
 <script>
 // testJSON : https://blog.naver.com/PostView.naver?blogId=jogilsang&logNo=222504849580&parentCategoryNo=69&categoryNo=&viewDate=&isShowPopularPosts=true&from=search
 // import PlanPage from "@/components/plan/PlanPlus.vue";
-import testJSON from "@/components/list/plan_data.json";
 import PlanPlus from "@/components/list/PlanPlus.vue";
 import gotoPlan from "@/components/list/button/gotoPlan.vue";
 import gotoReview from "@/components/list/button/gotoReview.vue";
-
-const details = testJSON;
+import travelApi from "@/api/travel.js";
 
 export default {
   name: "PlanCard",
@@ -57,21 +83,26 @@ export default {
     gotoPlan,
     gotoReview,
   },
+  created(){
+    travelApi.getTravel((res) => {
+      console.log(res);
+      this.details = res;
+    });
+  },
   methods: {
     gotoPlan: function () {
       console.log("계획 보러가기 버튼을 눌렀습니다");
       this.$router.push({ path: "/plan" });
     },
-    gotoReview: function () {
-      console.log("방문기 보러가기 버튼을 눌렀습니다");
-      this.$router.push({ path: "/review" });
+    gotoReview: function (travelSeq) {
+      console.log("방문기 보러가기 버튼을 눌렀습니다", travelSeq);
+      this.$router.push({ path: "/review", query: {"travelSeq":travelSeq} });
     },
   },
   data: function () {
     return {
       index: "",
-      details,
-      // details: [],
+      details: [],
     };
   },
 };

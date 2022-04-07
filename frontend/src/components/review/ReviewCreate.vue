@@ -1,7 +1,7 @@
 <template>
   <div class="stacy">
     <!-- 방문기 작성 컴포넌트 -->
-    <h1>나만의 애월 여행 방문기를 작성하세요!</h1>
+    <!-- <h1>방문기를 작성하세요!</h1> -->
     <br />
     <br />
     <review-create-form></review-create-form>

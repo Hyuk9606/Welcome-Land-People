@@ -23,11 +23,29 @@
 
 <script>
 import TripInformation from "@/components/review/trip/TripInformation.vue";
+import reviewApi from "@/api/review";
+import ReviewBegin from '@/components/review/ReviewBegin.vue';
+import ReviewRead from '@/components/review/ReviewRead.vue';
 
 export default {
   name: "ReviewView",
+  data(){
+    return{
+      review:null
+    }
+  },
   components: {
     TripInformation,
+    ReviewBegin,
+    ReviewRead,
+  },
+  created(){
+    // console.log(this.$route.query.travelSeq);
+    reviewApi.getReview(this.$route.query.travelSeq, (res) => {
+      console.log(res);
+      this.review = res;
+      this.$router.push({path: "/review/read", query: {"travelSeq":travelSeq}});
+    })
   },
 };
 </script>
