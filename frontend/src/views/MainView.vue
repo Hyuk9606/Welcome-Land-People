@@ -1,26 +1,12 @@
 <template>
-  <div>
-    <header-comp
-      @onOpenLoginModal="openLoginModal"
-      @onOpenSignUpModal="openSignUpModal"
-      @onLogout="logout"
-    ></header-comp>
+  <div class="mainview">
+    <header-comp @onOpenLoginModal="openLoginModal" @onOpenSignUpModal="openSignUpModal" @onLogout="logout"></header-comp>
     <div class="container">
       <jeju-comp></jeju-comp>
       <start-comp></start-comp>
-      <share-comp></share-comp>
     </div>
-    <login-modal
-      v-if="isLoginModalOpen"
-      :isOpen="isLoginModalOpen"
-      @onOpenSignUpModal="openSignUpModal"
-      @onCloseModal="closeLoginModal"
-    />
-    <sign-up-modal
-      v-if="isSignUpModalOpen"
-      :isOpen="isSignUpModalOpen"
-      @onCloseModal="closeSignUpModal"
-    />
+    <login-modal v-if="isLoginModalOpen" :isOpen="isLoginModalOpen" @onOpenSignUpModal="openSignUpModal" @onCloseModal="closeLoginModal" />
+    <sign-up-modal v-if="isSignUpModalOpen" :isOpen="isSignUpModalOpen" @onCloseModal="closeSignUpModal" />
     <router-view />
   </div>
 </template>
@@ -29,7 +15,6 @@
 import HeaderComp from "@/components/HeaderComp.vue";
 import JejuComp from "../components/main/JejuComp.vue";
 import StartComp from "../components/main/StartComp.vue";
-import ShareComp from "../components/main/ShareComp.vue";
 import LoginModal from "@/components/user/LoginModal";
 import SignUpModal from "@/components/user/signUpModal";
 import accountApi from "../api/account";
@@ -43,7 +28,6 @@ export default {
     HeaderComp,
     JejuComp,
     StartComp,
-    ShareComp,
     LoginModal,
     SignUpModal,
   },
@@ -109,6 +93,9 @@ export default {
 </script>
 
 <style scoped>
+.mainview {
+  overflow: hidden;
+}
 .container {
   width: 100%;
 }

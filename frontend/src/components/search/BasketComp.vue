@@ -3,13 +3,7 @@
     <div class="basketHeader"><h1>찜목록</h1></div>
     <div class="basketList">
       <span v-for="(item, i) in contents" :key="i">
-        <v-chip
-          class="ma-2"
-          close
-          :color="getLabel(item.label)"
-          @click:close="dislike(item.contentsId)"
-          text-color="white"
-        >
+        <v-chip class="ma-2" close :color="getLabel(item.label)" @click:close="dislike(item.contentsId)" text-color="white">
           {{ item.title }}
         </v-chip>
       </span>
@@ -87,6 +81,9 @@ export default {
 .basketList {
   height: 80%;
   margin: auto;
+}
+.basketList .v-chip {
+  margin: 1px;
 }
 .v-application .ma-2 {
   margin: 3px !important;

@@ -41,6 +41,15 @@ export default {
   overflow: hidden;
   overflow-y: scroll;
 }
+.v-application {
+  font-family: "MapoFlowerIsland", sans-serif !important;
+}
+@font-face {
+  font-family: "MapoFlowerIsland";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoFlowerIslandA.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 /** 스크롤 기능은 살리고 스크롤 바는 없애기 css
 레퍼런스 : https://wooaoe.tistory.com/49 */
 body {

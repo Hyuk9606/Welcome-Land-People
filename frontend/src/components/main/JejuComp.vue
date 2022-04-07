@@ -11,23 +11,16 @@
         <span class="mapColor" @click="inputColor"> 색칠하기 </span>
       </div>
       <div v-if="selectPhoto" slot="body">
-        <div>미리보기</div>
         <div>
-          <p>이미지 조정하기</p>
-        </div>
-        <div>
-          <p>이미지를 직접 움직이거나</p>
-          <p>아래 설정을 통해 편집할 수 있습니다.</p>
-        </div>
-        <div>
-          <input type="file" />
+          <form id="formElem" enctype="multipart/form-data">
+            <input type="file" class="hidden_input" id="reviewImageFileOpenInput" accept="image/*" multiple />
+          </form>
         </div>
         <div class="ralign">
-          <button class="okBtn" @click="close">선택 완료</button>
+          <button class="okBtn" @click="imgClose">선택 완료</button>
         </div>
       </div>
       <div v-if="selectColor" slot="body">
-        <div>미리보기</div>
         <div>
           <span class="c-41ac6c" @click="changeColor"></span>
           <span class="c-ffca43" @click="changeColor"></span>
@@ -43,18 +36,22 @@
           <span class="remove" @click="changeColor"><i class="c-ffffff fa-2x fa-solid fa-ban"></i></span>
         </div>
         <div class="ralign">
-          <button class="okBtn" @click="close">선택 완료</button>
+          <button class="okBtn" @click="colorClose">선택 완료</button>
         </div>
       </div>
     </modal-comp>
+    <div id="img-wrapper" class="img-wrapper"></div>
   </div>
 </template>
 
 <script>
 import * as d3 from "d3";
 import ModalComp from "@/components/ModalComp.vue";
+import jejumapApi from "@/api/jejumap";
+import { mapGetters } from "vuex";
 
 const MAP_GEOJSON = require("@/rjeju.geo.json");
+const account = "account";
 
 export default {
   data() {
@@ -62,26 +59,43 @@ export default {
       area: "",
       areaCode: 0,
       centered: 0,
-      colors: {
-        3394: { colr: "#ffffff" },
-        3395: { colr: "#ffffff" },
-        3396: { colr: "#ffffff" },
-        3397: { colr: "#ffffff" },
-        3398: { colr: "#ffffff" },
-        3400: { colr: "#ffffff" },
-        3401: { colr: "#ffffff" },
-        3420: { colr: "#ffffff" },
-        3421: { colr: "#ffffff" },
-        3422: { colr: "#ffffff" },
-        3423: { colr: "#ffffff" },
-        3424: { colr: "#ffffff" },
-        3425: { colr: "#ffffff" },
+      mapInput: {
+        3394: { type: "color", in: "#ffffff" },
+        3396: { type: "color", in: "#ffffff" },
+        3397: { type: "color", in: "#ffffff" },
+        3398: { type: "color", in: "#ffffff" },
+        3400: { type: "color", in: "#ffffff" },
+        3401: { type: "color", in: "#ffffff" },
+        3395: { type: "color", in: "#ffffff" },
+        3420: { type: "color", in: "#ffffff" },
+        3421: { type: "color", in: "#ffffff" },
+        3422: { type: "color", in: "#ffffff" },
+        3423: { type: "color", in: "#ffffff" },
+        3424: { type: "color", in: "#ffffff" },
+        3425: { type: "color", in: "#ffffff" },
       },
+      mapImg: {
+        3394: { file: "" },
+        3396: { file: "" },
+        3397: { file: "" },
+        3398: { file: "" },
+        3400: { file: "" },
+        3401: { file: "" },
+        3395: { file: "" },
+        3420: { file: "" },
+        3421: { file: "" },
+        3422: { file: "" },
+        3423: { file: "" },
+        3424: { file: "" },
+        3425: { file: "" },
+      },
+      tempIn: {},
       showModal: false,
       selectFill: true,
       selectPhoto: false,
       selectColor: false,
       current: "",
+      isLogined: false,
     };
   },
   components: {
@@ -90,11 +104,55 @@ export default {
   methods: {
     changeColor(d) {
       const color = d.path[0]._prevClass;
-      const ncolor = "#" + color.substring(2, 8);
-      d3.select(this.current).style("fill", ncolor);
-      this.colors[this.areaCode].colr = ncolor;
+      this.tempIn = "#" + color.substring(2, 8);
     },
     close() {
+      this.showModal = false;
+      this.selectFill = true;
+      this.selectPhoto = false;
+      this.selectColor = false;
+    },
+    imgClose() {
+      var formData = new FormData();
+      formData.append("image", document.getElementById("formElem")[0].files[0]);
+      jejumapApi.inputImg(
+        {
+          loc: this.areaCode,
+        },
+        formData,
+        (body) => {
+          console.log("이미지성공", body);
+          this.start();
+        },
+        (err) => {
+          console.log("이미지실패", err);
+        }
+      );
+
+      this.showModal = false;
+      this.selectFill = true;
+      this.selectPhoto = false;
+      this.selectColor = false;
+    },
+    colorClose() {
+      jejumapApi.inputColor(
+        {
+          loc: this.areaCode,
+        },
+        {
+          color: this.tempIn,
+        },
+        (body) => {
+          console.log("색칠성공", body);
+          d3.select(this.current).style("fill", this.tempIn);
+          this.mapInput[this.areaCode].type = "color";
+          this.mapInput[this.areaCode].in = this.tempIn;
+        },
+        (err) => {
+          console.log("색칠실패", err);
+        }
+      );
+
       this.showModal = false;
       this.selectFill = true;
       this.selectPhoto = false;
@@ -103,16 +161,19 @@ export default {
     inputColor() {
       this.selectFill = false;
       this.selectColor = true;
+      this.mapInput[this.areaCode].type = "color";
     },
     inputPhoto() {
       this.selectFill = false;
       this.selectPhoto = true;
+      this.mapInput[this.areaCode].type = "img";
     },
     partyColor(code) {
       let color = null;
       const localSeatCode = code;
-      if (localSeatCode in this.colors) {
-        color = this.colors[localSeatCode].colr;
+      if (localSeatCode in this.mapInput) {
+        color = this.mapInput[localSeatCode].in;
+        //console.log("색상", color);
       }
       return color;
     },
@@ -120,7 +181,7 @@ export default {
       // 현재의 브라우저의 크기 계산
       const divWidth = document.getElementById("map-wrapper").clientWidth;
       const width = divWidth < 1000 ? divWidth * 0.9 : 1000;
-      const height = width - 300;
+      const height = width - 200;
 
       // 지도를 그리기 위한 svg 생성
       const svg = d3
@@ -129,6 +190,8 @@ export default {
         .append("svg")
         .attr("width", width)
         .attr("height", height);
+
+      // const test = d3.select(".test-wrapper").append("svg");
 
       // 지도가 그려지는 그래픽 노드(g) 생성
       const g = svg.append("g");
@@ -155,7 +218,23 @@ export default {
 
       function fillFn(d) {
         const pcolor = _this.partyColor(d.properties.OBJECTID);
+        //console.log(pcolor);
         return pcolor;
+      }
+
+      function areaFn(d) {
+        //console.log(d);
+        const code = d.properties.OBJECTID;
+        //console.log(code);
+        return code;
+      }
+
+      function fileFn(d) {
+        const code = d.properties.OBJECTID;
+        const imgfile = "data:image/png;base64," + _this.mapImg[code].file;
+        //console.log("imgfile 받음?", _this.mapImg[code].file);
+
+        return imgfile;
       }
 
       function clicked(d) {
@@ -163,6 +242,7 @@ export default {
         _this.area = d.path[0].__data__.properties.ELEC_EMD;
         _this.areaCode = d.path[0].__data__.properties.OBJECTID;
         _this.current = this;
+        //console.log(_this.areaCode);
       }
 
       function mouseover() {
@@ -174,6 +254,29 @@ export default {
           return fillFn(d);
         });
       }
+
+      d3.select(".img-wrapper")
+        .selectAll("svg")
+        .data(MAP_GEOJSON.features)
+        .enter()
+        .append("svg")
+        .attr("id", "mySvg")
+        .attr("width", "0")
+        .attr("height", "0")
+        .append("defs")
+        .attr("id", "mdef")
+        .append("pattern")
+        .attr("id", areaFn)
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .append("image")
+        .attr("width", "220px")
+        .attr("height", "220px")
+        .attr("x", 0)
+        .attr("y", -35)
+        .attr("xlink:href", fileFn);
 
       // 지도 그리기
       mapLayer
@@ -188,9 +291,84 @@ export default {
         .on("mouseout", mouseout)
         .on("click", clicked);
     },
+    start() {
+      jejumapApi.infoMap(
+        (res) => {
+          //console.log("불러오기 성공", res);
+          for (var c = 0; c < res.length; c++) {
+            this.mapInput[res[c].loc].type = res[c].mapType;
+            if (res[c].mapType === "color") {
+              this.mapInput[res[c].loc].in = res[c].color;
+            } else {
+              //this.mapInput[res[c].loc].in = res[c].image.data;
+              this.mapInput[res[c].loc].in = "url(#" + res[c].loc + ")";
+              this.mapImg[res[c].loc].file = res[c].image.data;
+              //console.log(URL.createObjectURL(this.mapInput[res[c].loc].in));
+            }
+            if (c === res.length - 1) {
+              this.isLogined = !this.isLogined;
+            }
+          }
+          //this.drawMap();
+        },
+        (err) => {
+          console.log("불러오기 실패", err);
+          //this.drawMap();
+        }
+      );
+    },
   },
   mounted() {
+    //console.log("mounted 실행됨");
     this.drawMap();
+  },
+  computed: {
+    ...mapGetters(account, ["user"]),
+    ...mapGetters(account, ["token"]),
+  },
+  watch: {
+    isLogined() {
+      const paths = d3.selectAll("path")._groups[0];
+      const patterns = d3.selectAll("pattern")._groups[0];
+      //console.log(patterns.select("#3395"));
+      for (var i = 0; i < 13; i++) {
+        const code = paths[i].__data__.properties.OBJECTID;
+        if (this.mapInput[code].type === "image") {
+          //console.log("이거", this.mapImg[code].file);
+          const filename = "data:image/png;base64," + this.mapImg[code].file;
+          d3.select(patterns[i])
+            // .attr("x", 0)
+            // .attr("y", 0)
+            // .attr("width", "100%")
+            // .attr("height", "100%")
+            .select("image")
+            // .attr("width", "200px")
+            // .attr("height", "200px")
+            // .attr("x", 0)
+            // .attr("y", -30)
+            .attr("xlink:href", filename);
+        }
+        d3.select(paths[i]).style("fill", this.mapInput[code].in);
+      }
+    },
+    token(value) {
+      //console.log(value);
+      if (value === null) {
+        d3.selectAll("path").style("fill", "#ffffff");
+        for (var i = 0; i < 13; i++) {
+          const code = MAP_GEOJSON.features[i].properties.OBJECTID;
+          this.mapInput[code].type = "color";
+          this.mapInput[code].in = "#ffffff";
+          this.mapImg[code].file = "";
+        }
+      } else {
+        this.start();
+      }
+    },
+  },
+  created() {
+    //console.log("create 실행됨");
+    this.start();
   },
 };
 </script>
@@ -314,11 +492,10 @@ export default {
   width: 2rem;
   height: 2rem;
   margin: 12px;
-  background: #41ac6c;
 }
 .c-ffffff {
   color: red;
-  background-color: #ffffff;
+  // background-color: #ffffff;
   cursor: pointer;
 }
 .c-f393db {
