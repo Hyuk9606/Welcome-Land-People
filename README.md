@@ -1,7 +1,6 @@
 
 
 
-
 ### ✋어서와, 육지사람
 
 ------
@@ -20,7 +19,7 @@
 | Name     | 김신아                      | 김도연                      | 김소은                      | 유진주                      | 임혁                    | 황선주                      |
 | -------- | --------------------------- | --------------------------- | --------------------------- | --------------------------- | ----------------------- | --------------------------- |
 | Profile  | ![김신아](./Img/김신아.jpg) | ![김도연](./Img/김도연.png) | ![김소은](./Img/김소은.jpg) | ![유진주](./Img/유진주.jpg) | ![임혁](./Img/임혁.png) | ![황선주](./Img/황선주.jpg) |
-| Position | Leader & Backend            | Backend                     | Frontend                    | Backend                     | Backend                 | Frontend                    |
+| Position | Leader & Data Engineer            | Data Engineer                    | Frontend                    | Backend                     | Backend                 | Frontend                    |
 | Detailed | Hadoop - Mapreduce          | Hadoop - Flume              | Vue.js                      | Spring Boot, JPA, MongoDB   | Spring Boot, JPA, MySQL | Vue.js                      |
 
 
