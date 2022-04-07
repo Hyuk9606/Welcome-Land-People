@@ -27,6 +27,12 @@ const account = {
     setUser(state, user) {
       state.user = user;
     },
+    pushUserContents(state, contentsId) {
+      state.user.userContents.push(contentsId);
+    },
+    popUserContents(state, contentsId) {
+      state.user.userContents.pop(contentsId);
+    },
   },
 };
 

@@ -2,24 +2,101 @@
   <div class="basket">
     <div class="basketHeader"><h1>찜목록</h1></div>
     <div class="basketList">
-      <v-chip v-if="chip3" class="ma-2" close color="green" outlined @click:close="chip3 = false"> Success </v-chip>
-      <v-chip v-if="chip3" class="ma-2" close color="green" outlined @click:close="chip3 = false"> Success </v-chip>
-      <v-chip v-if="chip3" class="ma-2" close color="green" outlined @click:close="chip3 = false"> Success </v-chip>
-      <v-chip v-if="chip3" class="ma-2" close color="green" outlined @click:close="chip3 = false"> Success </v-chip>
-      <v-chip v-if="chip3" class="ma-2" close color="green" outlined @click:close="chip3 = false"> Success </v-chip>
-      <v-chip v-if="chip3" class="ma-2" close color="green" outlined @click:close="chip3 = false"> Success </v-chip>
-      <v-chip v-if="chip3" class="ma-2" close color="green" outlined @click:close="chip3 = false"> Success </v-chip>
-      <v-chip v-if="chip3" class="ma-2" close color="green" outlined @click:close="chip3 = false"> Success </v-chip>
+      <v-chip
+        v-if="chip3"
+        class="ma-2"
+        close
+        color="green"
+        outlined
+        @click:close="chip3 = false"
+      >
+        Success
+      </v-chip>
+      <v-chip
+        v-if="chip3"
+        class="ma-2"
+        close
+        color="green"
+        outlined
+        @click:close="chip3 = false"
+      >
+        Success
+      </v-chip>
+      <v-chip
+        v-if="chip3"
+        class="ma-2"
+        close
+        color="green"
+        outlined
+        @click:close="chip3 = false"
+      >
+        Success
+      </v-chip>
+      <v-chip
+        v-if="chip3"
+        class="ma-2"
+        close
+        color="green"
+        outlined
+        @click:close="chip3 = false"
+      >
+        Success
+      </v-chip>
+      <v-chip
+        v-if="chip3"
+        class="ma-2"
+        close
+        color="green"
+        outlined
+        @click:close="chip3 = false"
+      >
+        Success
+      </v-chip>
+      <v-chip
+        v-if="chip3"
+        class="ma-2"
+        close
+        color="green"
+        outlined
+        @click:close="chip3 = false"
+      >
+        Success
+      </v-chip>
+      <v-chip
+        v-if="chip3"
+        class="ma-2"
+        close
+        color="green"
+        outlined
+        @click:close="chip3 = false"
+      >
+        Success
+      </v-chip>
+      <v-chip
+        v-if="chip3"
+        class="ma-2"
+        close
+        color="green"
+        outlined
+        @click:close="chip3 = false"
+      >
+        Success
+      </v-chip>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
+const account = "account";
 export default {
   data() {
     return {
       chip3: true,
     };
+  },
+  computed: {
+    ...mapGetters(account, ["user"]),
   },
 };
 </script>

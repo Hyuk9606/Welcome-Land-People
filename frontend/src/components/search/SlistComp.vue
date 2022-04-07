@@ -1,99 +1,80 @@
 <template>
-  <div>
+  <div id="contents">
     <v-container fluid class="search">
-      <v-row class="searchPlace">
+      <v-row v-for="(content, i) in contents" :key="i" class="searchPlace">
         <v-col class="d-flex" cols="12" sm="12">
-          <div class="placeImg"><img src="@/assets/images/place1.png" /></div>
+          <div class="placeImg"><img :src="content.thumbnailPath" /></div>
           <div class="place">
-            <div class="placeName">박중섭 미술관</div>
-            <div class="placeAddress">제주특별자치도 서귀포시 이중섭로 27-3-444</div>
+            <div class="placeName">{{ content.title }}</div>
+            <div class="placeAddress">
+              {{ content.roadAddress }}
+            </div>
           </div>
           <div class="basket">
-            <div class="basketBtn" @click="inputPlace">
-              <i class="fa-xl fa-solid fa-cart-shopping"></i>
+            <div
+              :id="content.contentsId"
+              class="basketBtn"
+              @click="inputPlace(content.contentsId)"
+            >
+              <div v-if="isInclude(content.contentsId)">
+                <i class="fa-xl fa-solid fa-cart-shopping"></i>
+              </div>
+              <div v-else>
+                <i class="fa-xl fa-solid fa-cart-plus"></i>
+              </div>
             </div>
           </div>
         </v-col>
       </v-row>
-      <v-row class="searchPlace">
-        <v-col class="d-flex" cols="12" sm="12">
-          <div class="placeImg"><img src="@/assets/images/place1.png" /></div>
-          <div class="place">
-            <div class="placeName">박중섭 미술관</div>
-            <div class="placeAddress">제주특별자치도 서귀포시 이중섭로 27-3-444</div>
-          </div>
-          <div class="basket">
-            <div class="basketBtn" @click="inputPlace">
-              <i class="fa-xl fa-solid fa-cart-shopping"></i>
-            </div>
-          </div>
-        </v-col>
-      </v-row>
-      <v-row class="searchPlace">
-        <v-col class="d-flex" cols="12" sm="12">
-          <div class="placeImg"><img src="@/assets/images/place1.png" /></div>
-          <div class="place">
-            <div class="placeName">박중섭 미술관</div>
-            <div class="placeAddress">제주특별자치도 서귀포시 이중섭로 27-3-444</div>
-          </div>
-          <div class="basket">
-            <div class="basketBtn" @click="inputPlace">
-              <i class="fa-xl fa-solid fa-cart-shopping"></i>
-            </div>
-          </div>
-        </v-col>
-      </v-row>
-      <v-row class="searchPlace">
-        <v-col class="d-flex" cols="12" sm="12">
-          <div class="placeImg"><img src="@/assets/images/place1.png" /></div>
-          <div class="place">
-            <div class="placeName">박중섭 미술관</div>
-            <div class="placeAddress">제주특별자치도 서귀포시 이중섭로 27-3-444</div>
-          </div>
-          <div class="basket">
-            <div class="basketBtn" @click="inputPlace">
-              <i class="fa-xl fa-solid fa-cart-shopping"></i>
-            </div>
-          </div>
-        </v-col>
-      </v-row>
-      <v-row class="searchPlace">
-        <v-col class="d-flex" cols="12" sm="12">
-          <div class="placeImg"><img src="@/assets/images/place1.png" /></div>
-          <div class="place">
-            <div class="placeName">박중섭 미술관</div>
-            <div class="placeAddress">제주특별자치도 서귀포시 이중섭로 27-3-444</div>
-          </div>
-          <div class="basket">
-            <div class="basketBtn" @click="inputPlace">
-              <i class="fa-xl fa-solid fa-cart-shopping"></i>
-            </div>
-          </div>
-        </v-col>
-      </v-row>
-      <div class="text-center">
+
+      <!-- <div class="text-center">
         <v-pagination v-model="page" :length="4" circle></v-pagination>
-      </div>
+      </div> -->
     </v-container>
   </div>
 </template>
 
 <script>
+import searchApi from "@/api/search";
+import { mapGetters, mapMutations } from "vuex";
+
+const account = "account";
+
 export default {
+  props: ["contents", "page"],
   data() {
-    return {
-      page: 0,
-    };
+    return {};
   },
   methods: {
-    inputPlace() {
-      console.log("장바구니에 넣기");
+    ...mapMutations(account, ["pushUserContents", "popUserContents"]),
+
+    inputPlace(contentsId) {
+      console.log("장바구니에 넣기" + contentsId);
+      searchApi.likeContent(contentsId, () => {
+        if (this.isInclude(contentsId)) {
+          this.popUserContents(contentsId);
+        } else {
+          this.pushUserContents(contentsId);
+        }
+      });
     },
+    isInclude(contentsId) {
+      return this.user.userContents.find((el) => {
+        if (el.trim() == contentsId.trim()) return true;
+      });
+    },
+  },
+  computed: {
+    ...mapGetters(account, ["user"]),
   },
 };
 </script>
 
 <style scoped>
+#contents {
+  height: 60vh;
+  overflow-y: scroll;
+}
 .d-flex {
   padding: 10px;
   height: 18%;
