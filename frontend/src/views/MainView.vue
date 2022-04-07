@@ -58,7 +58,9 @@ export default {
     window.addEventListener("scroll", () => {
       this.isScrollTop = window.scrollY === 0;
     });
-    window.onload = function () {};
+    window.onload = function () {
+      console.log(process.env);
+    };
   },
   methods: {
     ...mapMutations(account, ["setToken", "setUser"]),

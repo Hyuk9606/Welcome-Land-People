@@ -5,6 +5,9 @@ const ACCOUNT_URI = {
   USER: "/users",
   JOIN: "/users/join",
   LOGOUT: "/users/logout",
+  LIKE: "/users/like",
+  LIKE_CONTENTS: "/users/contents",
+  DISLIKE: "/users/dislike",
 };
 
 export default {
@@ -19,5 +22,18 @@ export default {
   },
   register(body, success, fail) {
     req.join(ACCOUNT_URI.JOIN, body, success, fail);
+  },
+  likeContent(contentsId, success) {
+    console.log("like");
+    const uri = ACCOUNT_URI.LIKE + "/" + contentsId;
+    req.get(uri, success);
+  },
+  dislikeContent(contentsId, success) {
+    console.log("dislike");
+    const uri = ACCOUNT_URI.DISLIKE + "/" + contentsId;
+    req.get(uri, success);
+  },
+  getLikeContents(success) {
+    req.get(ACCOUNT_URI.LIKE_CONTENTS, success);
   },
 };

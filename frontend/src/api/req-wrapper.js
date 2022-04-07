@@ -1,5 +1,5 @@
 import axios from "axios";
-import store from "../store/index.js";
+import { store } from "../store/index.js";
 import handler from "./res-handler";
 // const URI_PREFIX = ""
 axios.defaults.baseURL =

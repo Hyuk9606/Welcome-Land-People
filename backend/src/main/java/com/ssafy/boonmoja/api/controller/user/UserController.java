@@ -86,6 +86,17 @@ public class UserController {
         return success("OK!!");
     }
     
+    @Operation(summary = "좋아요 취소", description = "좋아요 취소하기")
+    @Parameters({
+            @Parameter(name = "contentsId", description = "컨텐츠의 PK"),
+    })
+    @GetMapping("/dislike/{contentsId}")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    public ApiResult<String> doDislikeContents(@CurrentUser String userId, @PathVariable String contentsId) {
+        userService.dislikeContents(userId, contentsId);
+        return success("OK!!");
+    }
+    
     @Operation(summary = "찜목록", description = "좋아요 한 목록 조회")
     @GetMapping("/contents")
     @PreAuthorize("hasAuthority('ROLE_USER')")

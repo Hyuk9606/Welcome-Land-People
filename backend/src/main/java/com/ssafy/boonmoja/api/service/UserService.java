@@ -40,7 +40,14 @@ public class UserService {
             log.info("Like 추가 - user : {}, contents : {}", userId, contentsId);
             userContents = UserContents.builder().user(user).contents(contents).build();
             userContentsRepository.save(userContents);
-        } else {
+        }
+    }
+    public void dislikeContents(String userId, String contentsId) {
+        User user = userRepository.findByUserId(userId);
+        Contents contents = contentsRepository.findByContentsIdIs(contentsId);
+        
+        UserContents userContents = userContentsRepository.findByUserIsAndContentsIs(user, contents);
+        if (user.getUserContents().contains(userContents)){
             log.info("Like 삭제 - user : {}, contents : {}", userId, contentsId);
             userContentsRepository.delete(userContents);
         }
