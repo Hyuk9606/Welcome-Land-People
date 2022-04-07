@@ -109,7 +109,6 @@ export default {
         },
         (body) => {
           this.setToken(body.token);
-          console.log(body);
           this.id = this.password = "";
           this.isProcess = false;
           this.fetchUser(() => {

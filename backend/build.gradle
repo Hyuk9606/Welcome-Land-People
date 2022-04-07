@@ -38,6 +38,8 @@ dependencies {
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+	implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
 
 	// Swagger 관련 설정
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.4'

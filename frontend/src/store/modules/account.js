@@ -27,6 +27,14 @@ const account = {
     setUser(state, user) {
       state.user = user;
     },
+    pushUserContents(state, contentsId) {
+      state.user.userContents.push(contentsId);
+    },
+    popUserContents(state, contentsId) {
+      state.user.userContents = state.user.userContents.filter(
+        (el) => el != contentsId
+      );
+    },
   },
 };
 
