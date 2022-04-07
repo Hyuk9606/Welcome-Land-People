@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import searchApi from "@/api/search";
+import accountApi from "@/api/account";
 import { mapGetters, mapMutations } from "vuex";
 
 const account = "account";
@@ -49,14 +49,15 @@ export default {
     ...mapMutations(account, ["pushUserContents", "popUserContents"]),
 
     inputPlace(contentsId) {
-      console.log("장바구니에 넣기" + contentsId);
-      searchApi.likeContent(contentsId, () => {
-        if (this.isInclude(contentsId)) {
-          this.popUserContents(contentsId);
-        } else {
+      if (!this.isInclude(contentsId)) {
+        accountApi.likeContent(contentsId, () => {
           this.pushUserContents(contentsId);
-        }
-      });
+        });
+      } else {
+        accountApi.dislikeContent(contentsId, () => {
+          this.popUserContents(contentsId);
+        });
+      }
     },
     isInclude(contentsId) {
       return this.user.userContents.find((el) => {
@@ -119,6 +120,7 @@ export default {
   margin: 2px;
 }
 .placeAddress {
+  font-size: 12px;
   width: 90%;
   margin: 2px;
 }
@@ -138,5 +140,8 @@ export default {
 .basketBtn i {
   margin-top: 23px;
   margin-right: 2px;
+}
+.fa-cart-shopping {
+  color: #b9b7b7;
 }
 </style>

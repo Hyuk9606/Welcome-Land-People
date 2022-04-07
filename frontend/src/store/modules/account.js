@@ -31,7 +31,9 @@ const account = {
       state.user.userContents.push(contentsId);
     },
     popUserContents(state, contentsId) {
-      state.user.userContents.pop(contentsId);
+      state.user.userContents = state.user.userContents.filter(
+        (el) => el != contentsId
+      );
     },
   },
 };

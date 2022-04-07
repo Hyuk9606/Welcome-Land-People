@@ -17,9 +17,9 @@ public class ContentsService {
     }
     
     public List<Contents> getContentsEqualLabelAndAddress(String label, String address) {
-        return contentsRepository.findByLabelIsAndAddressContaining(label, address);
+        return contentsRepository.findByLabelStartingWithAndAddressContaining(label, address);
     }
     public List<Contents> getContentsEqualLabelAndTitle(String label, String title) {
-        return contentsRepository.findByLabelIsAndTitleContaining(label, title);
+        return contentsRepository.findByLabelStartingWithAndTitleContaining(label, title);
     }
 }

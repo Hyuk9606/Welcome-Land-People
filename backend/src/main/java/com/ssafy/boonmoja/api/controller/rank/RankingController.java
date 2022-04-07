@@ -1,8 +1,11 @@
 package com.ssafy.boonmoja.api.controller.rank;
 
 import com.ssafy.boonmoja.api.dto.RankDto;
-import org.springframework.http.ResponseEntity;
+import io.swagger.v3.oas.annotations.Operation;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.*;
@@ -10,10 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import static com.ssafy.boonmoja.utils.ApiUtils.ApiResult;
+import static com.ssafy.boonmoja.utils.ApiUtils.success;
+
+@Slf4j  // 로깅
+@RequiredArgsConstructor
 @RestController
+@RequestMapping("/api/rank")
 public class RankingController {
-    @GetMapping("/rank")
-    public ResponseEntity<List> rank() {
+    
+    @Operation(summary = "검색어 랭크", description = "검색어 랭킹 가져오기")
+    @GetMapping
+    public ApiResult<List<RankDto>> rank() {
         List<RankDto> list = new ArrayList<RankDto>();
         try{
             File file = new File("/application_log/result.txt");
@@ -34,7 +45,7 @@ public class RankingController {
         catch(IOException e){
 
         }
-        return  ResponseEntity.ok(list);
+        return  success(list);
     }
 
 }

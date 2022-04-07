@@ -2,7 +2,6 @@ import req from "./req-wrapper";
 
 const SEARCH_URI = {
   SEARCH: "/contents/search",
-  LIKE: "/users/like",
 };
 
 export default {
@@ -16,10 +15,6 @@ export default {
       "/" +
       find.query;
     console.log(uri);
-    req.get(uri, success);
-  },
-  likeContent(contentsId, success) {
-    const uri = SEARCH_URI.LIKE + "/" + contentsId;
     req.get(uri, success);
   },
 };

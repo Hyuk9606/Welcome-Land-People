@@ -10,7 +10,7 @@ import java.util.List;
 public interface ContentsRepository extends JpaRepository<Contents, Long> {
     Contents findByContentsIdIs(String contentsId);
     List<Contents> findByLabelIs(String label);
-    List<Contents> findByLabelIsAndAddressContaining(String label,String address);
-    List<Contents> findByLabelIsAndTitleContaining(String label,String title);
+    List<Contents> findByLabelStartingWithAndAddressContaining(String label,String address);
+    List<Contents> findByLabelStartingWithAndTitleContaining(String label,String title);
 
 }

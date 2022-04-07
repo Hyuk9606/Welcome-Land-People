@@ -37,11 +37,11 @@
             group
             style="btn-toggle-btn-height: 30px"
           >
-            <v-btn color="orange" text value="숙박"> 숙박 </v-btn>
-            <v-btn color="orange" text value="음식점"> 음식점 </v-btn>
-            <v-btn color="orange" text value="쇼핑"> 쇼핑 </v-btn>
+            <v-btn color="red" text value="숙박"> 숙박 </v-btn>
+            <v-btn color="green" text value="음식점"> 음식점 </v-btn>
+            <v-btn color="deep-purple darken-1" text value="쇼핑"> 쇼핑 </v-btn>
             <v-btn color="orange" text value="관광지"> 관광지 </v-btn>
-            <v-btn color="orange" text value="축제/행사"> 축제/행사 </v-btn>
+            <v-btn color="blue" text value="축제"> 축제/행사 </v-btn>
           </v-btn-toggle>
         </v-card>
       </v-container>
