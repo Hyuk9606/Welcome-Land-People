@@ -1,4 +1,5 @@
 <template>
+
   <div>
     <header>
       <h1>
@@ -31,6 +32,8 @@
           </v-col>
         </v-row>
         <v-card>
+          <v-row>
+            <v-col cols="12" sm="8">
           <v-btn-toggle
             v-model="find.label"
             tile
@@ -43,22 +46,44 @@
             <v-btn color="orange" text value="관광지"> 관광지 </v-btn>
             <v-btn color="blue" text value="축제"> 축제/행사 </v-btn>
           </v-btn-toggle>
+          </v-col>
+            <v-col cols="12" sm="4">
+            <v-carousel cycle vertical interval="2600" height="40" hide-delimiters :show-arrows="false">
+              <v-carousel-item v-for="(slide, i) in slides" :key="i">  
+                  <v-row id="rank" class="fill-height" align="center" justify="center" >
+                    <v-chip id="rankchip" class="ma-2" small color="orange" label>{{i+1}}</v-chip>
+                    <div id="ranktxt" class="text"> &nbsp; {{ slide.rank_voca }}</div>
+                  </v-row>
+              </v-carousel-item>
+            </v-carousel>
+            </v-col>
+          </v-row>
         </v-card>
       </v-container>
     </div>
   </div>
+  
 </template>
 
 <script>
+import rankApi from "@/api/rank";
 export default {
   props: ["find"],
   data() {
     return {
       // items: ["구좌", "남원", "대정", "서귀포", "성산", "안덕", "우도", "애월", "조천", "중문", "표선", "한경", "한림"],
       items: ["지역", "상호"],
+      slides: [],
     };
   },
+  created() {
+    rankApi.getRank((res) => {
+      this.slides = res;
+    });
+  },
+ 
 };
+
 </script>
 
 <style lang="scss" scoped>
@@ -112,4 +137,23 @@ img {
   font-size: 12px;
   font-weight: bold;
 }
+.v-carousel{
+  margin: 0%;
+  padding: 0%;
+  height: 30px;
+}
+#test{
+  background:#faaf3a;
+   margin:0%;
+  padding: 0%;
+  height: 0%;
+
+}
+#rank{
+  margin:0%;
+  padding: 0%;
+  height: 0%;
+  font-weight: bold;
+}
+
 </style>
