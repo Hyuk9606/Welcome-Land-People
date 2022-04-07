@@ -1,3 +1,7 @@
+
+
+
+
 ### ✋어서와, 육지사람
 
 ------
@@ -7,7 +11,7 @@
 - 개발 기간 : 2022. 02. 21 ~ 2022. 04. 08 (총 6주)
 - 팀명 : 분모자(분산모이자)
 
-
+<br>
 
 ### 👩👨팀원 소개 및 역할
 
@@ -19,7 +23,7 @@
 | Position | Leader & Data Engineer            | Data Engineer                    | Frontend                    | Backend                     | Backend                 | Frontend                    |
 | Detailed | Hadoop - Mapreduce          | Hadoop - Flume              | Vue.js                      | Spring Boot, JPA, MongoDB   | Spring Boot, JPA, MySQL | Vue.js                      |
 
-
+<br>
 
 ### 🌟주요 기능
 
@@ -28,6 +32,8 @@
 
 
 
+
+<br>
 
 ### ⚒기술 스택
 
@@ -59,7 +65,7 @@
 
 
 
-
+<br>
 
 ### 🛫형상관리 및 기획
 
@@ -69,19 +75,19 @@
 
 ![notion](./Img/notion.png)
 
-
+<br>
 
 **Jira**
 
 ![jira](./Img/jira.png)
 
-
+<br>
 
 **Burndown Chart**
 
 ![burndown_chart](./Img/burndown_chart.png)
 
-
+<br>
 
 **ERD**
 
@@ -89,11 +95,13 @@
 
 ![mysql_erd](./Img/mysql_erd.png)
 
+<br>
+
 - MongoDB
 
 ![mongodb_erd](./Img/mongodb_erd.png)
 
-
+<br>
 
 **산출물**
 
@@ -106,7 +114,7 @@
 
 
 
-
+<br>
 
 ### 📂디렉토리 구조
 
@@ -114,11 +122,18 @@
 
 **Back-end**
 
-- [보러가기](./BE/README.md)
+- [보러가기](./backend/README.md)
 
 **Front-end**
 
-- [보러가기](./BE/README.md)
+- [보러가기](./frontend/README.md)
 
+<br>
 
+### ©저작권 표기
 
+------
+
+**폰트**
+
+- 무료폰트_눈누_마포꽃섬_https://noonnu.cc/font_page/381
