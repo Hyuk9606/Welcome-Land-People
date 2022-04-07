@@ -12,57 +12,25 @@
               <div class="social-login-container"></div>
               <div class="form-wrap">
                 <div class="form-item">
-                  <input
-                    type="email"
-                    class="form-control"
-                    placeholder="이메일"
-                    v-model="id"
-                    @input="inputChanged"
-                    @keyup.enter="join"
-                  />
+                  <input type="email" class="form-control" placeholder="이메일" v-model="id" @input="inputChanged" @keyup.enter="join" />
                 </div>
                 <div class="form-item">
-                  <input
-                    type="password"
-                    class="form-control"
-                    placeholder="비밀번호"
-                    v-model="password"
-                    @input="inputChanged"
-                    @keyup.enter="join"
-                  />
+                  <input type="password" class="form-control" placeholder="비밀번호" v-model="password" @input="inputChanged" @keyup.enter="join" />
                 </div>
                 <div class="form-item">
-                  <input
-                    type="password"
-                    class="form-control"
-                    placeholder="비밀번호 확인"
-                    v-model="passwordCheck"
-                    @input="inputChanged"
-                    @keyup.enter="join"
-                  />
+                  <input type="password" class="form-control" placeholder="비밀번호 확인" v-model="passwordCheck" @input="inputChanged" @keyup.enter="join" />
                 </div>
                 <div class="form-item">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="이름"
-                    v-model="name"
-                    @input="inputChanged"
-                    @keyup.enter="join"
-                  />
+                  <input type="text" class="form-control" placeholder="이름" v-model="name" @input="inputChanged" @keyup.enter="join" />
                 </div>
 
                 <div class="form-item">
-                  <button @click="join" class="btn btn-block btn-primary">
-                    등록
-                  </button>
+                  <button @click="join" class="btn btn-block btn-primary">등록</button>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-danger" @click="$emit('onCloseModal')">
-                닫기
-              </button>
+              <button class="btn btn-danger" @click="$emit('onCloseModal')">닫기</button>
             </div>
           </div>
         </div>
@@ -97,12 +65,7 @@ export default {
     ...mapMutations(account, ["setToken"]),
     join() {
       if (this.isProcess) return;
-      if (
-        this.id.trim() === "" ||
-        this.password.trim() === "" ||
-        this.name.trim() === "" ||
-        this.password.trim() != this.passwordCheck.trim()
-      ) {
+      if (this.id.trim() === "" || this.password.trim() === "" || this.name.trim() === "" || this.password.trim() != this.passwordCheck.trim()) {
         this.cannotLogin = true;
         console.log("회원가입 실패");
         return;
@@ -144,7 +107,7 @@ export default {
 };
 </script>
 
-<style scope>
+<style scoped>
 .container {
   width: 100%;
   padding-right: 15px;
@@ -276,13 +239,10 @@ button.close {
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
-  -webkit-transition: border-color 0.15s ease-in-out,
-    -webkit-box-shadow 0.15s ease-in-out;
-  transition: border-color 0.15s ease-in-out,
-    -webkit-box-shadow 0.15s ease-in-out;
+  -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
-    -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
 .social_login_container {
@@ -310,16 +270,10 @@ button.close {
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 0.25rem;
-  -webkit-transition: color 0.15s ease-in-out,
-    background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
-    -webkit-box-shadow 0.15s ease-in-out;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
-    -webkit-box-shadow 0.15s ease-in-out;
+  -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
 .login-error {

@@ -11,17 +11,8 @@
             <div class="modal-body">
               <div class="social-login-container">
                 <template v-for="social in socials">
-                  <a
-                    :href="socialLoginUrl(social.socialType)"
-                    class="social_btn"
-                    :key="social.socialType"
-                  >
-                    <img
-                      :src="social.src"
-                      :style="{ width: social.width, height: social.height }"
-                      alt=""
-                      class="social_login"
-                    />
+                  <a :href="socialLoginUrl(social.socialType)" class="social_btn" :key="social.socialType">
+                    <img :src="social.src" :style="{ width: social.width, height: social.height }" alt="" class="social_login" />
                     {{ social.comment }}
                   </a>
                 </template>
@@ -31,52 +22,26 @@
               </div>
               <div class="form-wrap">
                 <div class="form-item">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="아이디"
-                    v-model="id"
-                    @input="inputChanged"
-                    @keyup.enter="login"
-                  />
+                  <input type="text" class="form-control" placeholder="아이디" v-model="id" @input="inputChanged" @keyup.enter="login" />
                 </div>
                 <div class="form-item">
-                  <input
-                    type="password"
-                    class="form-control"
-                    placeholder="비밀번호"
-                    v-model="password"
-                    @input="inputChanged"
-                    @keyup.enter="login"
-                  />
+                  <input type="password" class="form-control" placeholder="비밀번호" v-model="password" @input="inputChanged" @keyup.enter="login" />
                 </div>
 
                 <button
                   @click="$emit('onOpenSignUpModal')"
                   class="btn btn-block"
-                  style="
-                    color: #fff;
-                    background-color: #5fc02b;
-                    border-color: #5fc02b;
-                    font-size: 14px;
-                    border-radius: 4px;
-                    height: 45px;
-                    margin-bottom: 5px;
-                  "
+                  style="color: #fff; background-color: #5fc02b; border-color: #5fc02b; font-size: 14px; border-radius: 4px; height: 45px; margin-bottom: 5px"
                 >
                   회원가입
                 </button>
                 <div class="form-item">
-                  <button @click="login" class="btn btn-block btn-primary">
-                    로그인
-                  </button>
+                  <button @click="login" class="btn btn-block btn-primary">로그인</button>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-danger" @click="$emit('onCloseModal')">
-                닫기
-              </button>
+              <button class="btn btn-danger" @click="$emit('onCloseModal')">닫기</button>
             </div>
           </div>
         </div>
@@ -171,7 +136,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .container {
   width: 100%;
   padding-right: 15px;
@@ -326,13 +291,10 @@ button.close {
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
-  -webkit-transition: border-color 0.15s ease-in-out,
-    -webkit-box-shadow 0.15s ease-in-out;
-  transition: border-color 0.15s ease-in-out,
-    -webkit-box-shadow 0.15s ease-in-out;
+  -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
-    -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
 .social_login_container {
@@ -379,16 +341,10 @@ button.close {
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 0.25rem;
-  -webkit-transition: color 0.15s ease-in-out,
-    background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
-    -webkit-box-shadow 0.15s ease-in-out;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
-    -webkit-box-shadow 0.15s ease-in-out;
+  -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
 .login-error {

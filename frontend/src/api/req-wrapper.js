@@ -6,12 +6,13 @@ axios.defaults.baseURL = process.env.VUE_APP_BACKEND_DOMAIN + ":" + process.env.
 const URI_PREPENDER = "/api";
 const wrap = (url) => `${URI_PREPENDER}${url}`;
 const appendAuth = (config) => {
-  console.log(store.getters);
   const token = store.getters["account/token"];
   if (token) {
     if (!config) config = { headers: {} };
     if (!config.headers) config.headers = {};
     config.headers.Authorization = `Bearer ${store.getters["account/token"]}`;
+    // config.headers.contentType = "application/json; charset=utf-8";
+    //console.log(config);
   }
 
   return config;
@@ -23,7 +24,6 @@ export default {
   },
   post(url, body, success, fail = (err) => err.response.data.message, config) {
     console.log(wrap(url));
-
     axios.post(wrap(url), body, appendAuth(config)).then(handler.handle(success)).catch(fail);
   },
   join(url, body, success, fail = (err) => err.response.data.message) {

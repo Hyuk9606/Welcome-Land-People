@@ -44,4 +44,7 @@ export default {
   height: 80%;
   margin: auto;
 }
+.basketList .v-chip {
+  margin: 1px;
+}
 </style>

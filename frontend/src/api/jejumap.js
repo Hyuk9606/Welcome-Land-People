@@ -1,21 +1,23 @@
-import { store } from "@/store";
-import axios from "axios";
+import req from "./req-wrapper";
 
-const config = {
-  baseUrl: "http://i6c207.p.ssafy.io:8080",
-  access_token: store.getters["account/token"],
+const JEJUMAP_URI = {
+  MAPCOLOR: "/mapview/color/",
+  MAPIMG: "/mapview/image/",
+  ALLMAP: "/mapview/info",
+  DELMAP: "/mapview/",
 };
 
-// 지도 색깔 불러오기
-function getMapViewInfo(locId) {
-  return axios({
-    method: "POST",
-    url: `${config.baseUrl}/info/` + locId,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${config.access_token}`,
-    },
-  });
-}
-
-export { getMapViewInfo };
+export default {
+  inputColor(data, body, success, fail) {
+    req.post(JEJUMAP_URI.MAPCOLOR + data.loc, body, success, fail, {});
+  },
+  inputImg(data, body, success, fail) {
+    req.post(JEJUMAP_URI.MAPIMG + data.loc, body, success, fail, {});
+  },
+  infoMap(success, fail) {
+    req.get(JEJUMAP_URI.ALLMAP, success, fail, {});
+  },
+  delMap(loc, body, success, fail) {
+    req.delete(JEJUMAP_URI.DELMAP + loc, body, success, fail);
+  },
+};
