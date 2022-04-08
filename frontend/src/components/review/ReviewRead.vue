@@ -8,14 +8,37 @@
         <v-col cols="12">
           <div class="image_box">
             이곳에 이미지
-            <v-carousel show-arrows height="300" hide-delimiter-background show-arrows-on-hover>
-              <v-carousel-item v-for="(item, i) in items" :key="i" :src="item.src" reverse-transition="fade-transition" transition="fade-transition"></v-carousel-item>
+            <v-carousel
+              show-arrows
+              height="300"
+              hide-delimiter-background
+              show-arrows-on-hover
+            >
+              <v-carousel-item
+                v-for="(item, i) in items"
+                :key="i"
+                :src="item.src"
+                reverse-transition="fade-transition"
+                transition="fade-transition"
+              ></v-carousel-item>
             </v-carousel>
           </div>
-          <div class="text_box">이곳에 텍스트</div>
+          <div class="text_box">{{ this.review.text }}</div>
           <div class="button_position">
-            <v-btn @click="gotoUpdate" rounded class="button_style" style="background: rgb(111, 117, 121)">방문기 수정</v-btn>
-            <v-btn @click="gotoDelete" rounded class="button_style" style="background: rgb(111, 117, 121)">방문기 삭제</v-btn>
+            <v-btn
+              @click="gotoUpdate"
+              rounded
+              class="button_style"
+              style="background: rgb(111, 117, 121)"
+              >방문기 수정</v-btn
+            >
+            <v-btn
+              @click="gotoDelete"
+              rounded
+              class="button_style"
+              style="background: rgb(111, 117, 121)"
+              >방문기 삭제</v-btn
+            >
           </div>
         </v-col>
       </v-row>
@@ -25,38 +48,56 @@
 
 <script>
 // import http from "@/util/http-common.js";
+import reviewApi from "@/api/review";
 
 export default {
   name: "ReviewRead",
   components: {
     //
   },
+  props: ["review"],
   data() {
     return {
-      items: [
-        {
-          src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
-        },
-        {
-          src: "https://cdn.vuetifyjs.com/images/carousel/sky.jpg",
-        },
-        {
-          src: "https://cdn.vuetifyjs.com/images/carousel/bird.jpg",
-        },
-        {
-          src: "https://cdn.vuetifyjs.com/images/carousel/planet.jpg",
-        },
-      ],
+      // items: [
+      //   {
+      //     src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
+      //   },
+      //   {
+      //     src: "https://cdn.vuetifyjs.com/images/carousel/sky.jpg",
+      //   },
+      //   {
+      //     src: "https://cdn.vuetifyjs.com/images/carousel/bird.jpg",
+      //   },
+      //   {
+      //     src: "https://cdn.vuetifyjs.com/images/carousel/planet.jpg",
+      //   },
+      // ],
     };
+  },
+  created() {
+    reviewApi.getReview(this.$route.query.travelSeq, (res) => {
+      this.review = res;
+    });
   },
   methods: {
     gotoUpdate: function () {
       console.log("방문기 수정 버튼을 눌렀습니다");
-      this.$router.push({ path: "/review/update" });
+      const param = { review: this.review };
+      this.$router.push({
+        // path: "/review/update",
+        name: "ReviewUpdate",
+        params: {
+          data: this.review,
+          travelSeq: this.$route.query.travelSeq,
+        },
+      });
     },
     gotoDelete: function () {
       console.log("방문기 삭제 버튼을 눌렀습니다");
       this.$router.push({ path: "/review/delete" });
+    },
+    imageFormat(img) {
+      return "data:image/png;base64," + img;
     },
   },
 };
@@ -108,8 +149,8 @@ export default {
   margin: 10px;
   padding: 20px;
   /** 스크롤바 */
-  /* overflow: hidden; */
-  overflow: auto;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 .text_box {
   /** 배경 및 둘레 */
@@ -128,11 +169,11 @@ export default {
   margin-bottom: 7px;
   padding: 20px;
   /** 스크롤바 */
-  /* overflow: hidden; */
-  overflow: auto;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 /** 스크롤 바 없는 스크롤 기능 css*/
-/* body {
+body {
   -ms-overflow-style: none;
 }
 ::-webkit-scrollbar {
@@ -143,5 +184,5 @@ export default {
 }
 .box::-webkit-scrollbar {
   display: none;
-} */
+}
 </style>

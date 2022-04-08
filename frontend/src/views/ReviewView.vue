@@ -22,12 +22,30 @@
 </template>
 
 <script>
-import TripInformation from "@/components/plan/TripInformation.vue";
+import TripInformation from "@/components/review/trip/TripInformation.vue";
 
 export default {
   name: "ReviewView",
+  data() {
+    return {
+      review: null,
+    };
+  },
   components: {
     TripInformation,
+    ReviewBegin,
+    ReviewRead,
+  },
+  created() {
+    // console.log(this.$route.query.travelSeq);
+    reviewApi.getReview(this.$route.query.travelSeq, (res) => {
+      console.log(res);
+      this.review = res;
+      this.$router.push({
+        path: "/review/read",
+        query: { travelSeq: this.$route.query.travelSeq },
+      });
+    });
   },
 };
 </script>
@@ -39,7 +57,7 @@ export default {
 } */
 /** 스크롤 기능은 살리고 스크롤 바는 없애기 css
 레퍼런스 : https://wooaoe.tistory.com/49 */
-/* body {
+body {
   -ms-overflow-style: none;
 }
 ::-webkit-scrollbar {
@@ -50,7 +68,7 @@ export default {
 }
 .box::-webkit-scrollbar {
   display: none;
-} */
+}
 /** vuetify_grid 에 적용할 반투명 하얀색 컴포넌트 영역 css 
 레퍼런스 1 : https://vuetifyjs.com/en/components/grids/#row-and-column-breakpoints 
 레퍼런스 2 : https://ayoteralab.tistory.com/entry/Vuejs-10-use-v-form */
@@ -81,7 +99,6 @@ rem 사용 시 주의 : root em 모든 자식 요소들의 사이즈에 영향�
   /** 여기부터 스크롤바 */
   /* overflow: hidden; */
   /* overflow-y: scroll; */
-  overflow: auto;
 }
 .vuetify_grid_css_2 {
   /** 여기부터 배경 및 둘레 */
@@ -97,8 +114,7 @@ rem 사용 시 주의 : root em 모든 자식 요소들의 사이즈에 영향�
   margin-bottom: 0px;
   padding: 10px; /** 영역 안쪽 여유 공간 */
   /** 여기부터 스크롤바 */
-  /* overflow: hidden;
-  overflow-y: scroll; */
-  overflow: auto;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 </style>

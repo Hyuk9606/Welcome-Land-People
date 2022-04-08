@@ -39,7 +39,11 @@ export default {
   methods: {
     gotoCreate: function () {
       console.log("방문기 작성하기 버튼을 눌렀습니다");
-      this.$router.push({ path: "/review/create" });
+      console.log(this.$route.query);
+      this.$router.push({
+        path: "/review/create",
+        query: { travelSeq: this.$route.query.travelSeq },
+      });
     },
   },
 };

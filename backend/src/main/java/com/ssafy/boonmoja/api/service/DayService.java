@@ -38,7 +38,7 @@ public class DayService {
         User user = userRepository.findByUserId(userId);
         Travel travel = null;
         int maxDay = 0;
-        if(travelSeq == null){
+        if(travelSeq == 99999999){
             Travel tmp = Travel.builder()
                     .user(user)
                     .travelTitle("제목을 입력하세요")

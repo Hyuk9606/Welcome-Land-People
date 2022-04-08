@@ -1,122 +1,122 @@
-[
-        {
-          "travel_seq": 1,
-          "user_seq": 1,
-          "start_at": "2022-03-30",
-          "end_at": "2022-04-09",
-          "is_finished": false,
-          "traval_title": "나만의 애월 여행"
-        },
-        {
-          "travel_seq": 2,
-          "user_seq": 1,
-          "start_at": "2022-04-01",
-          "end_at": "2022-04-03",
-          "is_finished": false,
-          "traval_title": "내 꿈은 서귀포 카페 마스터"
-        },
-        {
-          "travel_seq": 3,
-          "user_seq": 1,
-          "start_at": "2022-03-01",
-          "end_at": "2022-03-02",
-          "is_finished": true,
-          "traval_title": "삼일절 올레길 코스 정복"
-        },
-        {
-          "travel_seq": 4,
-          "user_seq": 1,
-          "start_at": "2022-05-05",
-          "end_at": "2022-05-06",
-          "is_finished": false,
-          "traval_title": "어린이날 랜디스 도넛 방문"
-        },
-        {
-          "travel_seq": 5,
-          "user_seq": 1,
-          "start_at": "2022-05-27",
-          "end_at": "2022-06-30",
-          "is_finished": false,
-          "traval_title": "싸피 종강기념 한달살이"
-        },
-        {
-          "travel_seq": 6,
-          "user_seq": 1,
-          "start_at": "2022-06-06",
-          "end_at": "2022-06-06",
-          "is_finished": false,
-          "traval_title": "현충일 당일치기 이호테우"
-        },
-        {
-          "travel_seq": 7,
-          "user_seq": 1,
-          "start_at": "2022-05-27",
-          "end_at": "2022-06-30",
-          "is_finished": false,
-          "traval_title": "내 여행 목록 테스트 7 "
-        },
-        {
-          "travel_seq": 8,
-          "user_seq": 1,
-          "start_at": "2022-05-27",
-          "end_at": "2022-06-30",
-          "is_finished": false,
-          "traval_title": "내 여행 목록 테스트 8 "
-        },
-        {
-          "travel_seq": 9,
-          "user_seq": 1,
-          "start_at": "2022-05-27",
-          "end_at": "2022-06-30",
-          "is_finished": false,
-          "traval_title": "내 여행 목록 테스트 9 "
-        },
-        {
-          "travel_seq": 10,
-          "user_seq": 1,
-          "start_at": "2022-05-27",
-          "end_at": "2022-06-30",
-          "is_finished": false,
-          "traval_title": "내 여행 목록 테스트 10"
-        },
-        {
-          "travel_seq": 11,
-          "user_seq": 1,
-          "start_at": "2022-05-27",
-          "end_at": "2022-06-30",
-          "is_finished": false,
-          "traval_title": "내 여행 목록 테스트 11"
-        },
-        {
-          "travel_seq": 12,
-          "user_seq": 1,
-          "start_at": "2022-05-27",
-          "end_at": "2022-06-30",
-          "is_finished": false,
-          "traval_title": "내 여행 목록 테스트 12"
-        },
-        {
-          "travel_seq": 13,
-          "user_seq": 1,
-          "start_at": "2022-05-27",
-          "end_at": "2022-06-30",
-          "is_finished": false,
-          "traval_title": "내 여행 목록 테스트 13"
-        },
-                {
-          "travel_seq": 14,
-          "user_seq": 1,
-          "start_at": "2022-05-27",
-          "end_at": "2022-06-30",
-          "is_finished": false,
-          "traval_title": "내 여행 목록 테스트 14"
-        },
-                {
-          "travel_seq": 15,
-          "user_seq": 1,
-          "start_at": "2022-05-27",
-          "end_at": "2022-06-30",
-          "is_finished": false,
-          "traval_title": "내 여행 목록 테스트 15"
-        }
-      ]
+// [
+//         {
+//           "travel_seq": 1,
+//           "user_seq": 1,
+//           "start_at": "2022-03-30",
+//           "end_at": "2022-04-09",
+//           "is_finished": false,
+//           "traval_title": "나만의 애월 여행"
+//         },
+//         {
+//           "travel_seq": 2,
+//           "user_seq": 1,
+//           "start_at": "2022-04-01",
+//           "end_at": "2022-04-03",
+//           "is_finished": false,
+//           "traval_title": "내 꿈은 서귀포 카페 마스터"
+//         },
+//         {
+//           "travel_seq": 3,
+//           "user_seq": 1,
+//           "start_at": "2022-03-01",
+//           "end_at": "2022-03-02",
+//           "is_finished": true,
+//           "traval_title": "삼일절 올레길 코스 정복"
+//         },
+//         {
+//           "travel_seq": 4,
+//           "user_seq": 1,
+//           "start_at": "2022-05-05",
+//           "end_at": "2022-05-06",
+//           "is_finished": false,
+//           "traval_title": "어린이날 랜디스 도넛 방문"
+//         },
+//         {
+//           "travel_seq": 5,
+//           "user_seq": 1,
+//           "start_at": "2022-05-27",
+//           "end_at": "2022-06-30",
+//           "is_finished": false,
+//           "traval_title": "싸피 종강기념 한달살이"
+//         },
+//         {
+//           "travel_seq": 6,
+//           "user_seq": 1,
+//           "start_at": "2022-06-06",
+//           "end_at": "2022-06-06",
+//           "is_finished": false,
+//           "traval_title": "현충일 당일치기 이호테우"
+//         },
+//         {
+//           "travel_seq": 7,
+//           "user_seq": 1,
+//           "start_at": "2022-05-27",
+//           "end_at": "2022-06-30",
+//           "is_finished": false,
+//           "traval_title": "내 여행 목록 테스트 7 "
+//         },
+//         {
+//           "travel_seq": 8,
+//           "user_seq": 1,
+//           "start_at": "2022-05-27",
+//           "end_at": "2022-06-30",
+//           "is_finished": false,
+//           "traval_title": "내 여행 목록 테스트 8 "
+//         },
+//         {
+//           "travel_seq": 9,
+//           "user_seq": 1,
+//           "start_at": "2022-05-27",
+//           "end_at": "2022-06-30",
+//           "is_finished": false,
+//           "traval_title": "내 여행 목록 테스트 9 "
+//         },
+//         {
+//           "travel_seq": 10,
+//           "user_seq": 1,
+//           "start_at": "2022-05-27",
+//           "end_at": "2022-06-30",
+//           "is_finished": false,
+//           "traval_title": "내 여행 목록 테스트 10"
+//         },
+//         {
+//           "travel_seq": 11,
+//           "user_seq": 1,
+//           "start_at": "2022-05-27",
+//           "end_at": "2022-06-30",
+//           "is_finished": false,
+//           "traval_title": "내 여행 목록 테스트 11"
+//         },
+//         {
+//           "travel_seq": 12,
+//           "user_seq": 1,
+//           "start_at": "2022-05-27",
+//           "end_at": "2022-06-30",
+//           "is_finished": false,
+//           "traval_title": "내 여행 목록 테스트 12"
+//         },
+//         {
+//           "travel_seq": 13,
+//           "user_seq": 1,
+//           "start_at": "2022-05-27",
+//           "end_at": "2022-06-30",
+//           "is_finished": false,
+//           "traval_title": "내 여행 목록 테스트 13"
+//         },
+//                 {
+//           "travel_seq": 14,
+//           "user_seq": 1,
+//           "start_at": "2022-05-27",
+//           "end_at": "2022-06-30",
+//           "is_finished": false,
+//           "traval_title": "내 여행 목록 테스트 14"
+//         },
+//                 {
+//           "travel_seq": 15,
+//           "user_seq": 1,
+//           "start_at": "2022-05-27",
+//           "end_at": "2022-06-30",
+//           "is_finished": false,
+//           "traval_title": "내 여행 목록 테스트 15"
+//         }
+//       ]

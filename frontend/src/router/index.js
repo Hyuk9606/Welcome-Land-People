@@ -59,7 +59,7 @@ const routes = [
     path: "/review",
     name: "Review",
     component: ReviewView,
-    redirect: "/review/read",
+    redirect: "/review/begin",
     children: [
       {
         path: "begin",
