@@ -8,37 +8,20 @@
         <v-col cols="12">
           <div class="image_box">
             이곳에 이미지
-            <v-carousel
-              show-arrows
-              height="300"
-              hide-delimiter-background
-              show-arrows-on-hover
-            >
-              <v-carousel-item
-                v-for="(item, i) in items"
-                :key="i"
-                :src="item.src"
-                reverse-transition="fade-transition"
-                transition="fade-transition"
-              ></v-carousel-item>
+            <v-carousel show-arrows height="300" hide-delimiter-background show-arrows-on-hover>
+              <v-carousel-item v-for="(item, i) in this.review.image" :key="i" :src="imageFormat(item)" reverse-transition="fade-transition" transition="fade-transition"></v-carousel-item>
             </v-carousel>
           </div>
           <div class="text_box">{{ this.review.text }}</div>
           <div class="button_position">
-            <v-btn
-              @click="gotoUpdate"
-              rounded
-              class="button_style"
-              style="background: rgb(111, 117, 121)"
-              >방문기 수정</v-btn
-            >
-            <v-btn
+            <v-btn @click="gotoUpdate()" rounded class="button_style" style="background: rgb(111, 117, 121)">방문기 수정</v-btn>
+            <!-- <v-btn
               @click="gotoDelete"
               rounded
               class="button_style"
               style="background: rgb(111, 117, 121)"
               >방문기 삭제</v-btn
-            >
+            > -->
           </div>
         </v-col>
       </v-row>

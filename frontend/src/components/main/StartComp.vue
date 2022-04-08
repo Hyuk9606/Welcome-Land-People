@@ -13,7 +13,7 @@ export default {
   components: {},
   methods: {
     goSearch() {
-      this.$router.push("/search").catch(() => {});
+      this.$router.push("/list").catch(() => {});
     },
   },
 };

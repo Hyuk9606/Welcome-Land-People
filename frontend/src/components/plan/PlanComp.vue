@@ -35,8 +35,6 @@
             <v-chip v-if="chip2" close class="ma-2 chip_st" color="primary" text-color="white" @click:close="chip2 = false"> 이중섭 미술관 </v-chip>
             <v-chip v-if="chip3" close class="ma-2 chip_st" color="green" text-color="white" @click:close="chip3 = false"> 오설록 카페 </v-chip>
             <v-chip v-if="chip4" close class="ma-2 chip_st" color="orange" text-color="white" @click:close="chip4 = false"> 이호테우 바다 </v-chip>
-            <v-chip v-if="chip4" close class="ma-2 chip_st" color="green" text-color="white" @click:close="chip4 = false"> 랜디스 도넛 </v-chip>
-            <v-chip v-if="chip4" close class="ma-2 chip_st" color="green" text-color="white" @click:close="chip4 = false"> 울트라마린 </v-chip>
           </div>
         </div>
         <div class="chip">

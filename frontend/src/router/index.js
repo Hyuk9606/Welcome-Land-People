@@ -4,7 +4,6 @@ import VueRouter from "vue-router";
 import MainView from "../views/MainView.vue";
 import SearchView from "../views/SearchView.vue";
 
-import JimView from "@/views/JimView.vue";
 import PlanView from "@/views/PlanView.vue";
 
 // 여행 목록 페이지
@@ -36,11 +35,6 @@ const routes = [
   {
     path: "/search",
     component: SearchView,
-  },
-  {
-    path: "/jim",
-    name: "Jim",
-    component: JimView,
   },
   {
     path: "/list",
