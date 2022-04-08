@@ -11,11 +11,7 @@
             </div>
           </div>
           <div class="basket">
-            <div
-              :id="content.contentsId"
-              class="basketBtn"
-              @click="inputPlace(content.contentsId)"
-            >
+            <div :id="content.contentsId" class="basketBtn" @click="inputPlace(content.contentsId)">
               <div v-if="isInclude(content.contentsId)">
                 <i class="fa-xl fa-solid fa-cart-shopping"></i>
               </div>
@@ -74,8 +70,10 @@ export default {
 <style scoped>
 #contents {
   height: 60vh;
-  overflow-y: scroll;
+
+  /* overflow-y: scroll; */
 }
+
 .d-flex {
   padding: 10px;
   height: 18%;
@@ -87,6 +85,7 @@ export default {
 .search {
   width: 100%;
   height: 100%;
+  overflow: auto;
 }
 .searchPlace {
   margin: 3px;
@@ -115,12 +114,12 @@ export default {
 }
 .placeName {
   width: 90%;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   margin: 2px;
 }
 .placeAddress {
-  font-size: 12px;
+  font-size: 14px;
   width: 90%;
   margin: 2px;
 }

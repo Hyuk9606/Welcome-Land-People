@@ -3,7 +3,7 @@
     <div class="basketHeader"><h1>찜목록</h1></div>
     <div class="basketList">
       <span v-for="(item, i) in contents" :key="i">
-        <v-chip class="ma-2" close :color="getLabel(item.label)" @click:close="dislike(item.contentsId)" text-color="white">
+        <v-chip class="ma-2" :color="getLabel(item.label)" text-color="white">
           {{ item.title }}
         </v-chip>
       </span>

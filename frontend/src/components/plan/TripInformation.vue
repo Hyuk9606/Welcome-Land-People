@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import TripName from "@/components/review/trip/TripName.vue";
-import TripSchedule from "@/components/review/trip/TripSchedule.vue";
+import TripName from "@/components/plan/TripName.vue";
+import TripSchedule from "@/components/plan/TripSchedule.vue";
 
 export default {
   name: "TripInfomation",
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style scoped>
-body {
+/* body {
   -ms-overflow-style: none;
 }
 ::-webkit-scrollbar {
@@ -45,7 +45,7 @@ body {
 }
 .box::-webkit-scrollbar {
   display: none;
-}
+} */
 .info-back-size {
   width: 100%;
   height: 100%;
@@ -63,7 +63,8 @@ body {
   margin: 0px; /** 영역 겉쪽 여유 공간 */
   padding: 6px; /** 영역 안쪽 여유 공간 */
   /** 여기부터 스크롤바 */
-  overflow: hidden;
+  /* overflow: hidden; */
+  overflow: auto;
 }
 .vuetify_grid_css_2_info {
   /** 여기부터 배경 및 둘레 */
@@ -81,7 +82,8 @@ body {
   margin-bottom: 10px;
   padding: 20px; /** 영역 안쪽 여유 공간 */
   /** 여기부터 스크롤바 */
-  overflow: hidden;
-  overflow-y: scroll;
+  /* overflow: hidden;
+  overflow-y: scroll; */
+  overflow: auto;
 }
 </style>

@@ -22,10 +22,8 @@
 </template>
 
 <script>
-import TripInformation from "@/components/review/trip/TripInformation.vue";
+import TripInformation from "@/components/plan/TripInformation.vue";
 import reviewApi from "@/api/review";
-import ReviewBegin from "@/components/review/ReviewBegin.vue";
-import ReviewRead from "@/components/review/ReviewRead.vue";
 
 export default {
   name: "ReviewView",
@@ -36,8 +34,6 @@ export default {
   },
   components: {
     TripInformation,
-    ReviewBegin,
-    ReviewRead,
   },
   created() {
     // console.log(this.$route.query.travelSeq);

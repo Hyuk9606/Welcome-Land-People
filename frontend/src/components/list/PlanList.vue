@@ -25,7 +25,7 @@ export default {
 <style scoped>
 /** 스크롤 기능은 살리고 스크롤 바는 없애기 css
 레퍼런스 : https://wooaoe.tistory.com/49 */
-body {
+/* body {
   -ms-overflow-style: none;
 }
 ::-webkit-scrollbar {
@@ -36,7 +36,7 @@ body {
 }
 .box::-webkit-scrollbar {
   display: none;
-}
+} */
 .v12_112 {
   width: 80%;
   height: 80%;
@@ -47,7 +47,7 @@ body {
   left: 8%;
   border-radius: 20px;
   /* overflow: hidden; */
-  overflow-y: scroll;
+  overflow: auto;
   margin: 30px;
   padding: 11px;
 }

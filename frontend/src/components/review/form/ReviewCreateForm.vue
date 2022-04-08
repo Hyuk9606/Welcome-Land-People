@@ -10,42 +10,13 @@
       <br /> -->
       <!-- <input type="submit" value="Upload" /> -->
       <h2>이미지를 선택하세요!</h2>
-      <v-file-input
-        id="file"
-        multiple
-        rounded
-        label="이미지를 선택하세요!"
-        filled
-        prepend-icon="mdi-camera"
-        style="margin: 20px"
-      ></v-file-input>
+      <v-file-input id="file" multiple rounded label="이미지를 선택하세요!" filled prepend-icon="mdi-camera" style="margin: 20px"></v-file-input>
       <h2>내용을 입력하세요!</h2>
       <v-container fluid>
-        <v-textarea
-          v-model="text"
-          rounded
-          name="input-7-1"
-          filled
-          placeholder="내용을 입력하세요!"
-          style="margin-right: 10px; margin-left: 10px"
-          height="200px"
-          value=""
-        ></v-textarea>
+        <v-textarea v-model="text" rounded name="input-7-1" filled placeholder="내용을 입력하세요!" style="margin-right: 10px; margin-left: 10px" height="200px" value=""></v-textarea>
       </v-container>
-      <v-btn
-        @click="doPost"
-        rounded
-        class="button_style button_position"
-        style="background: rgb(111, 117, 121); color: white"
-        >작성 완료</v-btn
-      >
-      <v-btn
-        @click="gotoBegin"
-        rounded
-        class="button_style button_position"
-        style="background: rgb(111, 117, 121); color: white"
-        >돌아가기</v-btn
-      >
+      <v-btn @click="doPost" rounded class="button_style button_position" style="background: rgb(111, 117, 121); color: white">작성 완료</v-btn>
+      <v-btn @click="gotoBegin" rounded class="button_style button_position" style="background: rgb(111, 117, 121); color: white">돌아가기</v-btn>
     </form>
   </div>
 </template>
@@ -63,7 +34,7 @@ export default {
   methods: {
     gotoBegin: function () {
       console.log("작성 페이지에서 돌아가기 버튼을 눌렀습니다");
-      this.$router.push({ path: "/review/begin" });
+      this.$router.push("/list");
     },
     doPost() {
       const file = document.getElementById("file");
@@ -76,13 +47,13 @@ export default {
       console.log(formData);
       reviewApi.fileUpload(this.currentTravel, formData, (res) => {
         console.log(res);
+        this.$router.push("/list");
       });
     },
   },
   created() {
     this.currentTravel = this.$route.query.travelSeq;
-    this.postURI =
-      "http://j6c207.p.ssafy.io:8080/api/review/" + this.currentTravel;
+    this.postURI = "http://j6c207.p.ssafy.io:8080/api/review/" + this.currentTravel;
   },
 };
 </script>

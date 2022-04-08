@@ -13,7 +13,7 @@ export default {
           fail(res.data.header.message);
         }
       } else if (res.data.success === true) {
-        console.log(res.data.response);
+        //console.log(res.data.response);
         success(res.data.response);
       } else fail(res.data.error);
     };

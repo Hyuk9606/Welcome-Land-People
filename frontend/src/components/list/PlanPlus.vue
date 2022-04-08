@@ -5,13 +5,7 @@
     max-width="400"
     min-height="170"
     height="90%"
-    style="
-      background: rgb(142, 207, 255);
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px;
-      border-bottom-left-radius: 20px;
-      border-bottom-right-radius: 20px;
-    "
+    style="background: rgb(142, 207, 255); border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px"
   >
     <v-card-title class="center text-style"> + </v-card-title>
   </v-card>
@@ -23,7 +17,7 @@ export default {
   methods: {
     addPlan: function () {
       console.log("여행 추가 버튼을 눌렀습니다");
-      this.$router.push({ path: "/jim" });
+      this.$router.push({ path: "/plan" });
     },
   },
 };
