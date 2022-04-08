@@ -1,7 +1,7 @@
 <!-- vuetify 아이콘을 사용하려면 public/index.html head 안에  cdn 설치 -->
 <template>
   <div>
-    <form method="POST" action="/photos/add" enctype="multipart/form-data">
+    <form method="POST" action="#" enctype="multipart/form-data">
       <!-- 이미지를 선택하세요! :
       <input type="file" name="image" accept="image/*" multiple />
       <br />
@@ -11,6 +11,7 @@
       <!-- <input type="submit" value="Upload" /> -->
       <h2>이미지를 선택하세요!</h2>
       <v-file-input
+        id="file"
         multiple
         rounded
         label="이미지를 선택하세요!"
@@ -21,17 +22,18 @@
       <h2>내용을 입력하세요!</h2>
       <v-container fluid>
         <v-textarea
+          v-model="text"
           rounded
           name="input-7-1"
           filled
-          label="내용을 입력하세요!"
+          placeholder="내용을 입력하세요!"
           style="margin-right: 10px; margin-left: 10px"
           height="200px"
           value=""
         ></v-textarea>
       </v-container>
       <v-btn
-        type="submit"
+        @click="doPost"
         rounded
         class="button_style button_position"
         style="background: rgb(111, 117, 121); color: white"
@@ -49,13 +51,38 @@
 </template>
 
 <script>
+import reviewApi from "@/api/review";
 export default {
   name: "ReviewCreateForm",
+  data() {
+    return {
+      currentTravel: "",
+      text: "",
+    };
+  },
   methods: {
     gotoBegin: function () {
       console.log("작성 페이지에서 돌아가기 버튼을 눌렀습니다");
       this.$router.push({ path: "/review/begin" });
     },
+    doPost() {
+      const file = document.getElementById("file");
+
+      console.log(this.text);
+      const formData = new FormData();
+      Array.from(file.files).forEach((img) => formData.append("image", img));
+
+      formData.append("text", this.text);
+      console.log(formData);
+      reviewApi.fileUpload(this.currentTravel, formData, (res) => {
+        console.log(res);
+      });
+    },
+  },
+  created() {
+    this.currentTravel = this.$route.query.travelSeq;
+    this.postURI =
+      "http://j6c207.p.ssafy.io:8080/api/review/" + this.currentTravel;
   },
 };
 </script>

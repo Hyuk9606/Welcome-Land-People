@@ -1,33 +1,25 @@
 import req from "./req-wrapper";
 
 const REVIEW_URI = {
-  GET_REVIEW : '/review'
+  REVIEW: "/review",
+  IMAGE: "/review/image",
+  TEXT: "/review/text",
 };
 
 export default {
-  login(body, success, fail) {
-    req.post(ACCOUNT_URI.LOGIN, body, success, fail);
-  },
   getReview(travelSeq, success) {
-    req.get(REVIEW_URI.GET_REVIEW + "/" + travelSeq, success);
+    req.get(REVIEW_URI.REVIEW + "/" + travelSeq, success);
   },
-  logout(body, success) {
-    req.post(ACCOUNT_URI.LOGOUT, body, success);
+  fileUpload(travelSeq, body, success) {
+    const uri = REVIEW_URI.REVIEW + "/" + travelSeq;
+    req.fileUpload(uri, body, success);
   },
-  register(body, success, fail) {
-    req.join(ACCOUNT_URI.JOIN, body, success, fail);
+  imageUpdate(travelSeq, body, success) {
+    const uri = REVIEW_URI.IMAGE + "/" + travelSeq;
+    req.fileUpdate(uri, body, success);
   },
-  likeContent(contentsId, success) {
-    console.log("like");
-    const uri = ACCOUNT_URI.LIKE + "/" + contentsId;
-    req.get(uri, success);
-  },
-  dislikeContent(contentsId, success) {
-    console.log("dislike");
-    const uri = ACCOUNT_URI.DISLIKE + "/" + contentsId;
-    req.get(uri, success);
-  },
-  getLikeContents(success) {
-    req.get(ACCOUNT_URI.LIKE_CONTENTS, success);
+  textUpdate(travelSeq, body, success) {
+    const uri = REVIEW_URI.TEXT + "/" + travelSeq;
+    req.put(uri, body, success);
   },
 };
