@@ -2,7 +2,8 @@ import axios from "axios";
 import { store } from "../store/index.js";
 import handler from "./res-handler";
 // const URI_PREFIX = ""
-axios.defaults.baseURL = process.env.VUE_APP_BACKEND_DOMAIN + ":" + process.env.VUE_APP_BACKEND_PORT;
+axios.defaults.baseURL =
+  process.env.VUE_APP_BACKEND_DOMAIN + ":" + process.env.VUE_APP_BACKEND_PORT;
 const URI_PREPENDER = "/api";
 const wrap = (url) => `${URI_PREPENDER}${url}`;
 const appendAuth = (config) => {
@@ -19,19 +20,58 @@ const appendAuth = (config) => {
 };
 
 export default {
-  get(url, success, fail = (err) => err.response.data.message, config) {
-    axios.get(wrap(url), appendAuth(config)).then(handler.handle(success)).catch(fail);
+  fileUpload(
+    url,
+    body,
+    success,
+    fail = (err) => err.response.data.message,
+    config
+  ) {
+    let configure = appendAuth(config);
+    configure.headers["Content-Type"] = "multipart/form-data";
+    console.log(configure);
+    axios
+      .post(wrap(url), body, appendAuth(config))
+      .then(handler.handle(success))
+      .catch(fail);
+  },
+  fileUpdate(
+    url,
+    body,
+    success,
+    fail = (err) => err.response.data.message,
+    config
+  ) {
+    let configure = appendAuth(config);
+    configure.headers["Content-Type"] = "multipart/form-data";
+    console.log(configure);
+    axios
+      .put(wrap(url), body, appendAuth(config))
+      .then(handler.handle(success))
+      .catch(fail);
+  },
+  get(url, success, fail = (err) => console.log(err), config) {
+    axios
+      .get(wrap(url), appendAuth(config))
+      .then(handler.handle(success))
+      .catch(fail);
   },
   post(url, body, success, fail = (err) => err.response.data.message, config) {
     console.log(wrap(url));
-    axios.post(wrap(url), body, appendAuth(config)).then(handler.handle(success)).catch(fail);
+    axios
+      .post(wrap(url), body, appendAuth(config))
+      .then(handler.handle(success))
+      .catch(fail);
   },
   join(url, body, success, fail = (err) => err.response.data.message) {
     console.log(wrap(url));
     axios.post(wrap(url), body).then(handler.handle(success)).catch(fail);
   },
   put(url, body, success, fail = (err) => err.response.data.message, config) {
-    axios.put(wrap(url), body, appendAuth(config)).then(handler.handle(success)).catch(fail);
+    axios
+      .put(wrap(url), body, appendAuth(config))
+      .then(handler.handle(success))
+      .catch(fail);
   },
   upload(url, body, progress, success, fail) {
     var formData = new FormData();
@@ -58,6 +98,9 @@ export default {
       .catch(fail);
   },
   delete(url, success, fail = (err) => err.response.data.message, config) {
-    axios.delete(wrap(url), appendAuth(config)).then(handler.handle(success)).catch(fail);
+    axios
+      .delete(wrap(url), appendAuth(config))
+      .then(handler.handle(success))
+      .catch(fail);
   },
 };

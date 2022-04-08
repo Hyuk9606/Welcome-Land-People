@@ -40,7 +40,10 @@ export default {
     gotoCreate: function () {
       console.log("방문기 작성하기 버튼을 눌렀습니다");
       console.log(this.$route.query);
-      this.$router.push({path: "/review/create", query: {"travelSeq":this.$route.query.travelSeq}});
+      this.$router.push({
+        path: "/review/create",
+        query: { travelSeq: this.$route.query.travelSeq },
+      });
     },
   },
 };
