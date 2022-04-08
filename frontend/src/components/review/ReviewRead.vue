@@ -8,37 +8,14 @@
         <v-col cols="12">
           <div class="image_box">
             이곳에 이미지
-            <v-carousel
-              show-arrows
-              height="300"
-              hide-delimiter-background
-              show-arrows-on-hover
-            >
-              <v-carousel-item
-                v-for="(item, i) in items"
-                :key="i"
-                :src="item.src"
-                reverse-transition="fade-transition"
-                transition="fade-transition"
-              ></v-carousel-item>
+            <v-carousel show-arrows height="300" hide-delimiter-background show-arrows-on-hover>
+              <v-carousel-item v-for="(item, i) in items" :key="i" :src="item.src" reverse-transition="fade-transition" transition="fade-transition"></v-carousel-item>
             </v-carousel>
           </div>
           <div class="text_box">이곳에 텍스트</div>
           <div class="button_position">
-            <v-btn
-              @click="gotoUpdate"
-              rounded
-              class="button_style"
-              style="background: rgb(111, 117, 121)"
-              >방문기 수정</v-btn
-            >
-            <v-btn
-              @click="gotoDelete"
-              rounded
-              class="button_style"
-              style="background: rgb(111, 117, 121)"
-              >방문기 삭제</v-btn
-            >
+            <v-btn @click="gotoUpdate" rounded class="button_style" style="background: rgb(111, 117, 121)">방문기 수정</v-btn>
+            <v-btn @click="gotoDelete" rounded class="button_style" style="background: rgb(111, 117, 121)">방문기 삭제</v-btn>
           </div>
         </v-col>
       </v-row>
@@ -131,8 +108,8 @@ export default {
   margin: 10px;
   padding: 20px;
   /** 스크롤바 */
-  overflow: hidden;
-  overflow-y: scroll;
+  /* overflow: hidden; */
+  overflow: auto;
 }
 .text_box {
   /** 배경 및 둘레 */
@@ -151,11 +128,11 @@ export default {
   margin-bottom: 7px;
   padding: 20px;
   /** 스크롤바 */
-  overflow: hidden;
-  overflow-y: scroll;
+  /* overflow: hidden; */
+  overflow: auto;
 }
 /** 스크롤 바 없는 스크롤 기능 css*/
-body {
+/* body {
   -ms-overflow-style: none;
 }
 ::-webkit-scrollbar {
@@ -166,5 +143,5 @@ body {
 }
 .box::-webkit-scrollbar {
   display: none;
-}
+} */
 </style>

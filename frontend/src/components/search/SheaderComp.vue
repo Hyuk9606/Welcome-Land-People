@@ -1,5 +1,4 @@
 <template>
-
   <div>
     <header>
       <h1>
@@ -12,20 +11,10 @@
       <v-container fluid>
         <v-row>
           <v-col class="d-flex select" cols="12" sm="3">
-            <v-select
-              v-model="find.selected"
-              :items="items"
-              dense
-              solo
-            ></v-select>
+            <v-select v-model="find.selected" :items="items" dense solo></v-select>
           </v-col>
           <v-col class="d-flex inputDiv" cols="12" sm="9">
-            <input
-              v-model="find.query"
-              type="search"
-              class="searchInput"
-              @keyup.enter="$emit('doSearchApi')"
-            />
+            <input v-model="find.query" type="search" class="searchInput" @keyup.enter="$emit('doSearchApi')" />
             <button @click="$emit('doSearchApi')">
               <i class="fa-2x fa-solid fa-magnifying-glass"></i>
             </button>
@@ -34,35 +23,29 @@
         <v-card>
           <v-row>
             <v-col cols="12" sm="8">
-          <v-btn-toggle
-            v-model="find.label"
-            tile
-            group
-            style="btn-toggle-btn-height: 30px"
-          >
-            <v-btn color="red" text value="숙박"> 숙박 </v-btn>
-            <v-btn color="green" text value="음식점"> 음식점 </v-btn>
-            <v-btn color="deep-purple darken-1" text value="쇼핑"> 쇼핑 </v-btn>
-            <v-btn color="orange" text value="관광지"> 관광지 </v-btn>
-            <v-btn color="blue" text value="축제"> 축제/행사 </v-btn>
-          </v-btn-toggle>
-          </v-col>
+              <v-btn-toggle v-model="find.label" tile group style="btn-toggle-btn-height: 30px">
+                <v-btn color="red" text value="숙박"> 숙박 </v-btn>
+                <v-btn color="green" text value="음식점"> 음식점 </v-btn>
+                <v-btn color="deep-purple darken-1" text value="쇼핑"> 쇼핑 </v-btn>
+                <v-btn color="orange" text value="관광지"> 관광지 </v-btn>
+                <v-btn color="blue" text value="축제"> 축제/행사 </v-btn>
+              </v-btn-toggle>
+            </v-col>
             <v-col cols="12" sm="4">
-            <v-carousel cycle vertical interval="2600" height="40" hide-delimiters :show-arrows="false">
-              <v-carousel-item v-for="(slide, i) in slides" :key="i">  
-                  <v-row id="rank" class="fill-height" align="center" justify="center" >
-                    <v-chip id="rankchip" class="ma-2" small color="orange" label>{{i+1}}</v-chip>
-                    <div id="ranktxt" class="text"> &nbsp; {{ slide.rank_voca }}</div>
+              <v-carousel cycle vertical interval="2600" height="40" hide-delimiters :show-arrows="false">
+                <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                  <v-row id="rank" class="fill-height" align="center" justify="center">
+                    <v-chip id="rankchip" class="ma-2" small color="orange" label>{{ i + 1 }}</v-chip>
+                    <div id="ranktxt" class="text">&nbsp; {{ slide.rank_voca }}</div>
                   </v-row>
-              </v-carousel-item>
-            </v-carousel>
+                </v-carousel-item>
+              </v-carousel>
             </v-col>
           </v-row>
         </v-card>
       </v-container>
     </div>
   </div>
-  
 </template>
 
 <script>
@@ -81,9 +64,7 @@ export default {
       this.slides = res;
     });
   },
- 
 };
-
 </script>
 
 <style lang="scss" scoped>
@@ -126,6 +107,7 @@ img {
 }
 .v-select {
   border-radius: 20px;
+  font-size: 20px;
 }
 .v-card {
   background: #ffffff;
@@ -134,26 +116,24 @@ img {
   height: 30px;
 }
 .v-card .v-btn {
-  font-size: 12px;
+  font-size: 17px;
   font-weight: bold;
 }
-.v-carousel{
+.v-carousel {
   margin: 0%;
   padding: 0%;
   height: 30px;
 }
-#test{
-  background:#faaf3a;
-   margin:0%;
+#test {
+  background: #faaf3a;
+  margin: 0%;
   padding: 0%;
   height: 0%;
-
 }
-#rank{
-  margin:0%;
+#rank {
+  margin: 0%;
   padding: 0%;
   height: 0%;
   font-weight: bold;
 }
-
 </style>

@@ -36,10 +36,10 @@ export default {
   position: absolute;
   top: 0px;
   left: 0px;
-  overflow: hidden;
+  /* overflow: hidden; */
   /** 여기부터 스크롤바 */
-  overflow: hidden;
-  overflow-y: scroll;
+  /* overflow: hidden;
+  overflow-y: scroll; */
 }
 .v-application {
   font-family: "MapoFlowerIsland", sans-serif !important;
@@ -52,7 +52,7 @@ export default {
 }
 /** 스크롤 기능은 살리고 스크롤 바는 없애기 css
 레퍼런스 : https://wooaoe.tistory.com/49 */
-body {
+/* body {
   -ms-overflow-style: none;
 }
 ::-webkit-scrollbar {
@@ -63,6 +63,19 @@ body {
 }
 .box::-webkit-scrollbar {
   display: none;
+} */
+::-webkit-scrollbar {
+  width: 15px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #898b90;
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px white;
 }
 /* .v12_109 {
   width: 100%;

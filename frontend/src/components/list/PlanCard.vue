@@ -6,24 +6,9 @@
   <v-container fluid>
     <v-layout row wrap>
       <v-row dense>
-        <v-col
-          cols="12"
-          md="4"
-          sm="6"
-          v-for="(detail, index) in details"
-          v-bind:key="index"
-        >
-          <v-card
-            style="border-radius: 20px; background: rgb(142, 207, 255)"
-            class="round-box mx-auto"
-            max-width="400"
-          >
-            <v-card-subtitle
-              class="pb-0"
-              style="font-weight: bold; margin-top: 10px; margin-bottom: 10px"
-            >
-              {{ details[index].start_at }} ~ {{ details[index].end_at }}
-            </v-card-subtitle>
+        <v-col cols="12" md="4" sm="6" v-for="(detail, index) in details" v-bind:key="index">
+          <v-card style="border-radius: 20px; background: rgb(142, 207, 255)" class="round-box mx-auto" max-width="400">
+            <v-card-subtitle class="pb-0" style="font-weight: bold; margin-top: 10px; margin-bottom: 10px"> {{ details[index].start_at }} ~ {{ details[index].end_at }} </v-card-subtitle>
             <v-card-title class="card-erea center-row text-style">
               {{ details[index].traval_title }}
             </v-card-title>

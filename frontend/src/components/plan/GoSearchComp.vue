@@ -1,6 +1,6 @@
 <template>
-  <div class="go" @click="goPlan">
-    <span class="goBtn">계획 Go</span>
+  <div class="go" @click="goSearch">
+    <span class="goBtn">검색 Go</span>
     <img src="@/assets/images/character2.png" />
   </div>
 </template>
@@ -8,8 +8,8 @@
 <script>
 export default {
   methods: {
-    goPlan() {
-      this.$router.push("/plan");
+    goSearch() {
+      this.$router.push("/search");
     },
   },
 };
