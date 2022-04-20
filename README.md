@@ -1,7 +1,3 @@
-
-
-
-
 ### ✋어서와, 육지사람
 
 ------
@@ -25,13 +21,39 @@
 
 <br>
 
+### :notebook: 실행 방법
+
+---
+
+#### Backend + MySQL + MongoDB => Docker
+
+```
+git clone https://github.com/Hyuk9606/Welcome-Land-People.git
+
+cd Welcome-Land-People
+
+docker-compose up
+```
+
+<br>
+
+#### Frontend
+
+```
+cd frontend
+
+npm i
+
+npm run serve
+```
+
+
+
 ### 🌟메인화면
 
 ------
 
-
-
-![1.main](./Img/1.main.png)
+![1.main](./Img/main.gif)
 
 <br>
 
