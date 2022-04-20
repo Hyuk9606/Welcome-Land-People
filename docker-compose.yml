@@ -2,7 +2,7 @@ version: "3"
 
 services:
   backend: # 컨테이너 이름
-    image: skdltm117/boonmoja-backend:0.5 # 실행할 이미지
+    image: skdltm117/boonmoja-backend:0.7 # 실행할 이미지
     # build: ./backend/dangdang
     environment:
       SPRING_DATASOURCE_URL: "jdbc:mysql://boonmoja-mysql:3306/boonmoja?useUnicode=yes&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Seoul"

@@ -27,7 +27,7 @@ public class RankingController {
     public ApiResult<List<RankDto>> rank() {
         List<RankDto> list = new ArrayList<RankDto>();
         try{
-            File file = new File("/application_log/result.txt");
+            File file = new File("/exec/result.txt");
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             String line ="";
